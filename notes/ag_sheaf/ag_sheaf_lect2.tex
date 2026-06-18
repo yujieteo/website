@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{example}{Example}
+
+\geometry{margin=1in}
+
+\title{Sheaf Theory 2}
+\author{-}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+The intuition we present here for sheaves is that one can have values over a base. These become sheaves of wheat with stalks that shoot up. Elements of these stalks are germs, which we recall are equivalence classes of local sections of a stalk. These stalks are visualised as growing on a base.
+
+The objective of this lecture is to present the perspective of etale spaces, as well as the distinction with espace etale.
+
+Consider the category of topological spaces. One can consider a category, known as a slice category, on a base object, denoted as $B$. Then, take the morphisms to be commutative diagrams over the base object. 
+
+We will recall the definition of a slice category.
+
+\begin{definition}
+A slice category, or more intuitively the over category over an object $B$, is a category given by the following data with a corresponding category $\mathbb{C}$: it has objects which are morphisms such that the codomain of the morphisms in the category $\mathbb{C}$ are the object $B$. The morphisms of a slice category are commutative diagrams that form as a result of morphisms (in the category $\mathbb{C}$) between preimages over the object $B$
+\end{definition}
+
+The slice category is a special case of a comma category where one takes the comma category with respect to a constant functor to the base object. We shall not go deeper into the details of this definition, this is simply a reminder that this construction exists.
+
+Importantly, back to our objective, one can see that the slice category is indeed the category of spaces over a base object, or simply bundles.
+
+One can now define what an etale space is. There is a lot to juggle in this definition since there is a base space object, a total space object, and the category of topological spaces. The morphism in question defining the etale space is also an object in the slice category associated with the definition as well, so things get confusing rather quickly. It might be useful to try and rewrite the definition yourself so as to avoid having to bump into trees.
+
+\begin{definition}
+An etale space is an object that is a morphism, denoted as the projection morphism, from a total space object (this is secretly the colimit of stalks) to a base space object that is a object in the slice category of topological spaces (what happens if we replace this definition with general spaces?) over the bade object. This object is a local homeomorphism (or local morphism if we do not take the category to be the category of topological spaces).
+
+This local morphism has the following data, for every point in the total space, there is an open subset of the total space contained in the total space such that the image of the open subset is open in the base space, and the restriction of the local morphism in question to the open neighborhood is an homeomorphism (or morphism in general settings apart from topological spaces)
+\end{definition}
+
+Notice that with this definition, one requires some idea of openness that needs to be generalised beyond a topological space. This suggests that indeed, this may not be the right definition. Nevertheless, this definition is worth digesting.
+
+The base space is called the stalk of the section in the total space over a point in the base space.
+
+Be careful, we take the total space to be the colimit of stalks, not fibres. So the etale space perspective is that of a base.
+
+Another perspective is that for the example of the etale space, the base space is typically a circle, and one tries to do the theory of covering spaces over it.
+
+What are the minimal requirements for an etale sheaf to be set up? There are a few possibilities. One just needs something for a map to be a local homeomorphism of topoi, then construct a topos on top of it. One can take a topoi of sheaves which is a category with coverage (basically a site, assume this to be small for illustration), then one can take its slice category over a Yoneda embedded object. This is a slice topos, admitting a canonical etale projection that admits a local homeomorphism of topoi. Details I have presented here, are scant, see Carchedi's paper for an article on this. 
+
+A topos is equivalent ot the full subcategory of a slice topos over the topos itself, this is the category of topoi over the topos that consists of etale morphisms of topoi. We would like to emphasise that the slice category or slice topos is related to etale morphisms of topoi. The equivalence sends an element in the topos to a morphism of the topos over the element to the topos itself. Indeed, one can view this space as a topos, send a space it to its topos of sheaves. The etale geometric morphism, for example from $\mathrm{Sh}(X) \rightarrow \mathrm{Sh}(Y)$ are in bijection with local homeomorphisms when the codomain of the etale geometric morphism is sober. Suppose one considers $F$ in $\mathrm{Sh}(X)$, the local homeomorphism $E(F) \rightarrow X$ which corresponds to $F$ by construction of the slice topos, the local homeomorphism $E(F) \rightarrow X$ a etale geometric morphism $\mathrm{Sh}(X)/F \rightarrow \mathrm{Sh}(X)$.
+
+Let us work out one example with the notion of an etale space. The etale space is helpful in thinking about the sheafification of a presheaf. Consider a presheaf on a topological space, then take its stalk at a point. A stalk is a filtered colimit i.e. a space indexed by the directed system of neighbourhoods over a point. One can define a topology on the union of the stalks over all points such that the (natural) projection from the disjoint union of all stalks to the topological space from each stalk is a local homeomorphism. This sheaf is naturally isomorphic to the original presheaf if the original presheaf is already a sheaf. This is the sheafification of the presheaf, and it is the left adjoint to the forgetful functor from sheaves to presheaves.
+
+\end{document}  

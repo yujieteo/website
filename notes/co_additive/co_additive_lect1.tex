@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{example}{Example}
+
+\geometry{margin=1in}
+
+\title{Additive Combinatorics 1}
+\author{-}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+At least to me, additive combinatorics seem to be about the combinatorial estimates for sums and differences of finite sets. However, the big draw to the field is that there is a guiding stone in the form of Szemeredi's theorem, and the various proofs of it that spawned various techniques that are used to prove it.
+
+True to its name, additive combinatorics will feature a lot of combinatorics. However, it is interesting that discrete Fourier analysis will play a crucial role in motivative the subject.
+
+We will follow standard notation on the topic, let $Z$ be an abelian additive group.
+
+Some examples of interest will be the integers $\mathbb{Z}$, finite cyclic groups $Z = \mathbb{Z}/n\mathbb{Z}$ or in fact, to truly connect it to torii, we have the lattice $\mathbb{Z}^n$, recall that topologically this looks like torii.
+
+This might seem strange at first, in fact it was strange at least at first for me to try and graps this, it is to try and compute sum sets and differences sets of this phenomena.
+
+Recall that $Z$ is an abelian ADDITIVE group. Then we can compute the sum sets in terms of set builder notation.
+
+\[A + B := \{a + b : a \in A, b \in B\}\]
+
+There is also the difference set, recall that differences represent to some extent "homs" where we have on eset of elements being some sort of reference point of the other.
+
+\[A - B := \{a - b : a \in A, b \in B\}\]
+
+Additive combinatorics concerns themselves with questions on the relative sizes of these sets. But why? This is an intriguing question that I have yet to answer for myself.
+
+My own interests in the topic lean far outwards. In fact, they are kind of involved closer towards how questions like this involve various other fields. It would be interesting to survey the plethora of techniques that are used to spawn results in the field, such as discrete Fourier analysis, the probabilistic method, ergodic theory, basic counting argument, extremal graph theory, and so on.
+
+It is also amazing to see how all these techniques are used to prove the same result. This is Szemeredi's theorem.
+
+At first sight, this theorem does not seem to have much connection to other things, however, it is a very deep result that has connections to other fields.
+
+One might call this result the Rosetta's stone of the field.
+
+We shall give a statement of Szemeredi's theorem here.
+
+\begin{theorem}[Szemeredi's theorem]
+    A subset of the natural numbers has positive upper density contains an arithmetic progression of any length.
+\end{theorem}
+
+These terms are not clearly defined, and it is indeed strange that a theorem on arithmetic progressions is stated in terms of density. What is even stranger is how it is proven using ergodic theory, which is a field that is seemingly far from the topic of arithmetic progressions.
+
+It is not clear where all the connections to other fields as promised lies in this result.
+
+Let us give some sketch of Furstenberg's proof of this result using ergodic theory, withotu sketching out the definitions or much of the theory.
+
+The first idea is to correspond sequences of numbers with a measure preserving systems. Indeed, this seems like a weird idea to have. At first, but this is motivated by the statement of Szemerdi's theorem in tersm of Banach densities. Forgive us, we will assume some background in ergodic theory. But really one must concentrate on the vague words of "positive upper Banach density".
+
+\begin{theorem}[Szemeredi's theorem]
+    A subset of the integers with positive upper Banach density contains an arithmetic progression of any length.
+\end{theorem}
+
+We now fix this congusion by defining the upper Banach density.
+
+\begin{definition}[Upper Banach density]
+    A set of integers $A$ consisting of elements in $\mathbb{Z}$. The upper banach density of $A$ is defined as a limit supremum, where it is the limit supremum of the counting measure of the set $A$ intersected with an interval $[-N, N]$, this is then divided by $2N + 1$ (why?).
+\end{definition}
+
+I am not sure why this definition is indeed the case.
+
+There are a few questions that comes up here. Firstly, why do we use limit supremum? Why do we even use the notion of upper Banach density?
+
+Apparently, the notion of upper Banach density is one that applies to all sets. There exists sets with no natural density if one uses the limit definition. An exercise is to find one of these sets.
+
+There is also another conventional definition of upper Banach density where one takes the limit supremum of the counting section of the intersection on the interval $[N,M]$ and then divide out by $M - N$. I am not sure about this definition, but it seems to be equivalent to the one we have.
+
+But basically, this example illustrates what does one mean by density. Ine can compute with this example essentially.
+
+\begin{example}
+    The set of odd numbers have upper Banach density of $\frac{1}{2}$, since the counting measure of the set of odd numbers intersected with the interval $[-N, N]$ is $N + 1$ (why?) and then we divide by $2N + 1$ to get $\frac{1}{2}$.
+\end{example}
+
+We now find make precise what does one mean by a $k$-term arithmetic progression. Since this is needed for some formal statement later. And indeed I found something rather intriguing when thinking about this in th elens of linear algebra.
+
+\begin{definition}
+    Given a set of integers $A$, we say that $A$ contains a $k$-term arithmetic progression if there exists integers $n, d$ such that "linear combinations" $n + id$ is an integer for $i$ in partition $[0, k-1]$ are all in $A$.
+\end{definition}
+
+The weird thing about this definition is that arithemtic progressions look like linear algebra with the scalars within some sort of partition $[0, k-1]$. At least, this is how I am thinking about it in this moment, whether or not this is relevant.
+
+Essentially, in ergodic theory language, there is this thing called multiple recurrence. Multiple reccurences of any measure preserving system is equivalent to Szemeredi's theorem somehow. This seems to be the major step in the proof.
+
+We shall focus on this idea, by first reminding ourselves on the definition of measure preserving systems, and then we will define what is meant by multiple reccurence.
+
+\begin{definition}[Measure space]
+    A measure space is a space (not well defined here) $X$ with a measure $\mu$ and a sigma algebra of (typically Borel, but I don't know) measurable sets. We will abuse notation by reducing it to just $X$
+\end{definition}
+
+I shall give some bad definitions since there is no symbol pushing, but these bad definitions essentially reveal how I think about these things.
+
+\begin{definition}[Measure preserving map]
+    A measure preserving map is a map such that if you have the map $T$ mapping from measure space $X$ to measure space $Y$, one considers preimage of $T$ on a set $A$ in $Y$ we have the measure on $X$ acting on the preimage of $T$ on $A$ is equal to the measure on $Y$ acting on $A$ itself. (This is a bad definition, I am not going to write it out in symbols, since I want one to focus on the fact that the measure preserving map as a preimage is composition if one recalls their six functor formalisms).
+
+    A measure preserving map is an invertible measure preserving map, if the inverse is measurable and well defined. 
+    
+    In short, it works as composition, and we can do category theory with it. (Another bad definition.)
+\end{definition}
+
+Now that I have basically babbled on about measure preserving maps, we can now move on to the definition of a measurable preserving system. 
+
+\begin{definition}
+    The data of a measure space with a measurable preserving map is a emasure preserving system. This is a dynamical system if the underlying map associated with this is a measure preserving map on the underlying space.
+\end{definition}
+
+Note that we have not even explicitly called out what a space is in this definition. Indeed, we shall highlight that for this proof, the first step is to establish some sort of correspondence principle between a sequence of numbers and a measure preserving system, working in the case of counting measures. So, what one wants to establish is that every measure preserving system has some Szemeredi type property which implies Szemerdi's theorem. 
+
+Then, one will want to define some sort of extension principles, which will not be described here. With Zorn's lemma and additional lemma work (one big draw to this subject to me is to learn how to make plenty of lemmas), one will essentially be able to prove Szemeredi's theorem.
+
+It is amazing that a theorem that is essentially about the additive nature of some sets, when cast through the lens of measure preserving systems and ergodic theory, one can recover this result.
+
+There are of course more links with this. The use of a measure somehow lends this easily to harmonic analysis. Essentially, when one does Tate's thesis or something like that, one wants to endow some Haar measure on some locally compact group, then one can do Fourier analysis on this. Essentially, once one has some sort of structure on a group (recall that group is some sort of symmetry by Cayley's theorem), one can then try very hard to do Fourier analysis on this symmetry. This is typically establishes by some sort of duality theorem. For the case of additive combinatorics, the duality correspondence is fairly easy to set up and not very difficult.
+
+Also, since combinatorics comes into the picture, it will be very clear that some sort of counting argument will be needed. Techniques in graph theory, the probabilistic method, general combinatorics, linear algebra methods, enumerative geometry, will all help in the counting. I have not exposed this side of the theory in this discussion, however if we have an opportunit to do so later, we shall discuss.
+
+\end{document}  
