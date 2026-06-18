@@ -1,0 +1,345 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
+\geometry{margin=1in}
+
+\title{Probability Theory: Lecture 1}
+\author{}
+\date{}
+
+% ----------------------------------------------------------------
+\begin{document}
+\maketitle
+
+We present a classic problem with a very conceptual 
+solution, showcasing linearity of expectation. 
+The problem is known as \emph{Buffon's 
+needle}, and one elegant solution strategy is due to 
+Barbier.
+
+We follow Barbier's exposition step by step, beginning with Buffon's needle and arriving, through successive generalisations, at Buffon's noodle. The key
+insight is to use probabilistic reasoning, specifically linearity of
+expectation.
+
+Please do not worry about rigour and focus instead on the key ideas. Please do not feel guilty about skipping the optional parts, which may be essential to the solution but not necessary to appreciate the ideas of finding the right abstraction.
+
+% ================================================================
+\section*{Setup}
+
+Parallel straight lines are drawn on the plane $\mathbb{R}^2$ at equal
+distance $d$ apart. A needle of length $L$ that is less than or equal to $d$ is thrown at random onto the
+plane. We assume that all positions and orientations of the needle are
+equally likely. \textbf{What is the probability that the needle crosses at
+least one of the lines?}
+
+% ================================================================
+\section*{Questions}
+
+\begin{enumerate}[(a)]
+
+  \item \textbf{Long needles and counting crossings.}
+  Instead of asking for a probability directly, we work with the random
+  variable $X_1 =$ the number of times a randomly thrown needle of length
+  $L_1$ crosses one of the parallel lines. (A needle can cross more than one
+  line if it is long enough.)
+
+  \begin{enumerate}[(i)]
+    \item We say the needle is \emph{short} if $L_1 < d$. What integer
+      values can $X_1$ take when the needle is short? Briefly justify
+      your answer.
+
+    \item What integer values can $X_1$ take when the needle can be
+      arbitrarily long?
+
+    \item Let $p_n = P(X_1 = n)$ for $n = 0, 1, 2, \ldots$\,. Write
+      down the definition of $E[X_1]$ as a sum involving the $p_n$.
+
+    \item Show that when the needle is short, $E[X_1] = p_1$, the
+      probability of crossing exactly one line. Why does this mean it
+      suffices to compute $E[X_1]$ in order to solve Buffon's original
+      problem?
+
+    \item Explain why $E[X_1]$ depends only on $L_1$ (and on the fixed
+      spacing $d$), so that we may write $E[X_1] = f(L_1)$ for some
+      function $f$.
+  \end{enumerate}
+
+  \item \textbf{Two needles and linearity of expectation.}
+  Throw a second needle of length $L_2$ independently, and let $X_2$ be
+  the number of times it crosses the lines.  We now weld the two needles
+  rigidly together at one point to form a single rigid object, and throw
+  the combined object at random.
+
+  Recall that for \emph{any} two random variables $X$ and $Y$ (with finite expected values):
+  \[
+    E[X + Y] = E[X] + E[Y].
+  \]
+  Independence is \textbf{not} required for this identity.
+
+  \begin{enumerate}[(i)]
+    \item (Optional) Argue that $X_1$ and $X_2$ are independent
+      when the two needles are thrown separately.
+
+    \item Using linearity of expectation, write $E[X_1 + X_2]$ in terms
+      of $E[X_1]$ and $E[X_2]$.
+
+    \item Use part~(a)(v) to write $E[X_1 + X_2]$ as a function of
+      $L_1$ and $L_2$.
+  \end{enumerate}
+
+  \item \textbf{Many needles and the functional equation.}
+  We now weld $n$ needles of lengths $L_1, \ldots, L_n$ together rigidly
+  (end-to-end, or in any rigid configuration) to form a polygonal
+  \emph{noodle}, and throw the whole thing at random.
+
+  \begin{enumerate}[(i)]
+    \item Write down $E[X_1 + X_2 + \cdots + X_n]$ using linearity of
+      expectation.
+
+    \item Use part~(a)(v) to express $E[X_1 + \cdots + X_n]$ purely in
+      terms of the function $f$ and the lengths $L_1, \ldots, L_n$.
+
+    \item (Optional) The welded object of total length $L_1 + \cdots + L_n$ is
+      itself a single rigid object, so by~(a)(v) its expected crossing
+      number is $f(L_1 + \cdots + L_n)$. Deduce that
+      \[
+        f(L_1 + \cdots + L_n) = f(L_1) + \cdots + f(L_n).
+      \]
+      Use this to prove that $f(qL) = q\,f(L)$ for every positive
+      rational $q$, and hence that $f$ is linear on the positive
+      rationals: $f(L) = rL$ for some constant $r > 0$ and all rational
+      $L > 0$.
+
+    \item (Optional) Explain why $f$ is monotonically increasing, and use this to
+      conclude that $f(L) = rL$ for \emph{all} real $L > 0$.
+  \end{enumerate}
+
+  \item \textbf{(Optional) Buffon's noodle: a smooth curve.}
+  Now let $C$ be any smooth rigid curve of length $L$, and let $Y$ be the
+  number of times $C$ crosses the parallel lines when thrown at random.
+
+  \begin{enumerate}[(i)]
+    \item (Optional) Approximate $C$ by a polygonal path with $k$ straight segments
+      of lengths $\ell_1, \ldots, \ell_k$ (so $\ell_1 + \cdots + \ell_k
+      \approx L$). Using part~(c) and a limiting argument, explain why
+      $E[Y] = rL$.
+
+    \item (Optional) Conclude that $E[Y] = rL$ holds for any rectifiable curve $C$
+      of length $L$, for the same constant $r$ as before (which we have
+      not yet determined).
+  \end{enumerate}
+
+\newpage
+
+  \item \textbf{Determining $r$: the circle trick.}
+  
+  The main result to use is the formula $E[Y] = rL$ for any curve $C$ of length $L$.
+  It is OK if you have skipped the earlier exercises.
+
+  We now choose a very special curve $C$ to pin down the constant $r$.
+  Let $C$ be a \emph{circle of diameter $d$} (so it has the same diameter
+  as the spacing between the lines).
+
+  \begin{enumerate}[(i)]
+    \item By thinking carefully about the geometry, compute $E[Y]$
+      directly from the definition of expectation. (Hint: how many times
+      does a circle of diameter $d$ cross a family of parallel lines
+      spaced $d$ apart, regardless of where it lands?) You should
+      obtain $E[Y] = 2$.
+
+    \item Compute the circumference $L$ of this circle.
+
+    \item Use $E[Y] = rL$ to solve for $r$.
+
+    \item Finally, for a \emph{short} needle of length $L_1 < d$, use
+      part~(a)(iv) to deduce
+      \[
+        P(\text{needle crosses a line}) \;=\; \frac{2L_1}{\pi d}.
+      \]
+  \end{enumerate}
+
+\end{enumerate}
+
+% ================================================================
+\newpage
+\section*{Solutions}
+
+\begin{enumerate}[(a)]
+
+  % ------------------------------------------------------------------
+  \item
+
+  \begin{enumerate}[(i)]
+
+    \item A short needle has length $L_1 < d$, the spacing between lines.
+    Since consecutive lines are distance $d$ apart and the needle is
+    strictly shorter than $d$, it cannot reach from one line to the next,
+    so it can cross \emph{at most} one line. Therefore $X_1 \in \{0, 1\}$.
+
+    \item When $L_1$ can be arbitrarily large there is no upper bound on
+    the number of lines it can cross, so $X_1$ can take any value in
+    $\{0, 1, 2, 3, \ldots\}$.
+
+    \item By the definition of expectation for a non-negative integer-valued
+    random variable,
+    \[
+      E[X_1] \;=\; \sum_{n=0}^{\infty} n\, p_n
+              \;=\; 0 \cdot p_0 + 1 \cdot p_1 + 2 \cdot p_2 + \cdots
+    \]
+
+    \item When $L_1 < d$ we have $p_n = 0$ for all $n \geq 2$ (by
+    part~(i)), so
+    \[
+      E[X_1] = 0 \cdot p_0 + 1 \cdot p_1 = p_1.
+    \]
+    But $p_1 = P(X_1 = 1) = P(\text{needle crosses exactly one line}) =
+    P(\text{needle crosses at least one line})$, which is exactly the
+    probability we want to find. So computing $E[X_1]$ is equivalent to
+    solving Buffon's original problem.
+
+    \item The parallel lines are uniformly spaced and the needle is thrown
+    uniformly at random (all positions and orientations equally likely).
+    There is no preferred position or direction on the plane, so the
+    distribution of $X_1$ is completely determined by the geometry: only
+    the length $L_1$ of the needle and the spacing $d$ matter.  Since $d$
+    is fixed throughout, $E[X_1]$ depends only on $L_1$, and we may write
+    $E[X_1] = f(L_1)$.
+
+  \end{enumerate}
+
+  % ------------------------------------------------------------------
+  \item
+
+  \begin{enumerate}[(i)]
+
+    \item When the two needles are thrown
+    separately, the position and orientation of each needle are chosen
+    independently of the other. Therefore the events involving the first
+    needle are independent of those involving the second, so $X_1$ and
+    $X_2$ are independent.
+
+    \item After welding, the total number of crossings of the combined
+    object is $X_1 + X_2$ (each needle still contributes its own
+    crossings). By linearity of expectation,
+    \[
+      E[X_1 + X_2] = E[X_1] + E[X_2].
+    \]
+
+    \item By part~(a)(v), $E[X_1] = f(L_1)$ and $E[X_2] = f(L_2)$, so
+    \[
+      E[X_1 + X_2] = f(L_1) + f(L_2).
+    \]
+
+  \end{enumerate}
+
+  % ------------------------------------------------------------------
+  \item
+
+  \begin{enumerate}[(i)]
+
+    \item Applying linearity of expectation to $n$ needles,
+    \[
+      E[X_1 + X_2 + \cdots + X_n] = E[X_1] + E[X_2] + \cdots + E[X_n].
+    \]
+
+    \item Using $E[X_i] = f(L_i)$ for each $i$,
+    \[
+      E[X_1 + \cdots + X_n] = f(L_1) + f(L_2) + \cdots + f(L_n).
+    \]
+
+    \item The welded object is a single rigid piece of total length
+    $L_1 + \cdots + L_n$, so by part~(a)(v) its expected crossing number
+    is also $f(L_1 + \cdots + L_n)$.  Combining with part~(ii) above:
+    \[
+      f(L_1 + \cdots + L_n) = f(L_1) + \cdots + f(L_n). \tag{$*$}
+    \]
+    Setting all $L_i = L$ in $(*)$ gives $f(nL) = n\,f(L)$ for every
+    positive integer $n$.  Setting $L \mapsto L/m$ then gives
+    $f(L) = m\,f(L/m)$, i.e.\ $f(L/m) = f(L)/m$.  Combining:
+    $f((n/m)L) = (n/m)\,f(L)$ for all positive integers $n, m$.
+    Taking $L = 1$ shows $f(q) = q\,f(1)$ for every positive rational
+    $q$, i.e.\ $f(L) = rL$ with $r = f(1) > 0$.
+
+    \item If $L > L'$ then a needle of length $L$ can always land in
+    every position a needle of length $L'$ can, and sometimes cross more
+    lines, so $f(L) \geq f(L') $; in fact $f$ is strictly increasing.
+    For any real $L > 0$, choose rationals $q^- < L < q^+$; then
+    $rq^- = f(q^-) \leq f(L) \leq f(q^+) = rq^+$.  Sending $q^\pm \to L$
+    gives $f(L) = rL$ for all real $L > 0$.
+
+  \end{enumerate}
+
+  % ------------------------------------------------------------------
+  \item
+
+  \begin{enumerate}[(i)]
+
+    \item Approximate $C$ by a polygonal path with $k$ segments of lengths
+    $\ell_1, \ldots, \ell_k$.  Each segment is a straight needle; call
+    $X^{(j)}$ the number of crossings of segment~$j$.  By part~(c),
+    \[
+      E\!\left[\sum_{j=1}^k X^{(j)}\right]
+        = \sum_{j=1}^k f(\ell_j) = r\sum_{j=1}^k \ell_j.
+    \]
+    As the mesh of the polygonal approximation tends to zero, $\sum \ell_j
+    \to L$ and the expected crossings of the polygon converge to $E[Y]$,
+    giving $E[Y] = rL$.
+
+    \item The argument holds for any rectifiable curve $C$: approximate by
+    polygons and pass to the limit.  The constant $r$ is the same because
+    it was determined purely by the spacing $d$ and does not depend on the
+    shape of $C$.
+
+  \end{enumerate}
+
+  % ------------------------------------------------------------------
+  \item
+
+  \begin{enumerate}[(i)]
+
+    \item A circle of diameter $d$ has the same width as the spacing
+    between lines.  No matter where or how the circle lands, it always
+    crosses \emph{exactly} two of the parallel lines (the leftmost and
+    rightmost lines it straddles), never more and never fewer.  (It lies
+    strictly between two consecutive lines only if its centre is more than
+    $d/2$ from each line, which is impossible when the diameter equals $d$.)
+    Therefore $Y = 2$ with probability $1$, and
+    \[
+      E[Y] = 2.
+    \]
+    This is why a circle of diameter $d$ is such a convenient choice: its
+    crossing number is \emph{deterministic}, making $E[Y]$ trivial to
+    compute.
+
+    \item The circumference of a circle of diameter $d$ is
+    \[
+      L = \pi d.
+    \]
+
+    \item From $E[Y] = rL$ we get $2 = r \cdot \pi d$, so
+    \[
+      r = \frac{2}{\pi d}.
+    \]
+
+    \item For a short needle of length $L_1 < d$, parts~(a)(iv) and the
+    formula $f(L_1) = rL_1$ give
+    \[
+      P(\text{needle crosses a line})
+        = E[X_1]
+        = f(L_1)
+        = \frac{2L_1}{\pi d}.
+    \]
+    This is the answer to Buffon's original problem, obtained without
+    evaluating any trigonometric integral.
+
+  \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

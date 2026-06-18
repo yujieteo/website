@@ -14,6 +14,8 @@ https://math.stackexchange.com/questions/1897078/maximal-abelian-extension-unram
 
 https://kskedlaya.org/18.786/ps10.pdf, direct proof of Kronecker-Weber theorem as per Franz Lemmermeyer.
 
+https://arxiv.org/pdf/math/9205211v1, Knuth's remarks on notation
+
 https://arxiv.org/pdf/1211.3256, ergodicity of K^\times proven for any global field in both number field and function field cases
 
 https://www.math.uchicago.edu/~emerton/pdffiles/reciprocity.pdf, reciprocity driven by concrete attempts to solve ;problems, Dirichlet's proof of primes in arithmetic reciprocity relies on quadratic reciprocity, modularity cojecture, Sato-Tate uses Langlands reciprocity. First half discusses abelian L-funcitons, compare Dirichlet's formulas for the value of L(1, chi) with Dedekind's general class number formula, left side ois automorphic, right side as motivic (in context for this discussion) quadratic reciprocity is required for the comparison. 
