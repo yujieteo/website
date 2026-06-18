@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\geometry{margin=1in}
+
+\title{Sheaf Theory - Lecture 3}
+\author{}
+\date{}
+
+% ----------------------------------------------------------------
+\begin{document}
+\maketitle
+
+The goal is help one understand the point of cohomology by thinking about an anti-derivative $F'(x) = 1/x$.
+Thinking about \emph{locality} will be crucial. Exercises are inspired by discussions from Tom Leinster and Oscar Cunningham. You may feel free to find online. There is also a good expository video by Aleph Null on YouTube.
+
+Please do not worry about rigour, but try to understand the main ideas and intuition.
+
+% ================================================================
+\section*{Questions}
+
+\begin{enumerate}[(a)]
+
+    \item Let $x$ be a real number. Substitute $x = 0$ into $\dfrac{1}{x}$. Why does this mean the "natural" domain for studying anti-derivatives of $1/x$ is the \emph{punctured} real line $\mathbb{R} \setminus \{0\}$?
+
+    \item The real logarithm $\log$ can be tentatively defined as the inverse of $\exp$. Since $\exp(y) > 0$ for all real $y$ (it never equals zero), what is the domain of $\log$? Why can we not define $\log(x)$ for $x \leq 0$?
+
+    \item Describe informally the "\emph{connected components}" of $\mathbb{R} \setminus \{0\}$: how many pieces does the punctured line break into, and what are they? (A "connected component" is a maximal piece you can travel around in without jumping.)
+
+    \item Suppose $f'(x) = 0$ for all $x$ in its domain. Argue informally why $f$ must be constant \emph{on each connected component}, but need not be the same constant on different components. Give a concrete example on $\mathbb{R} \setminus \{0\}$.
+
+    \item Define the indicator function
+    \[
+        \mathbf{1}_{x>0} = \begin{cases} 1 & x > 0 \\ 0 & x \leq 0 \end{cases}
+    \]
+    and similarly define $\mathbf{1}_{x<0}$. Evaluate both functions at $x = -2,\ 0,\ 2$. What do you notice about their sum $\mathbf{1}_{x>0} + \mathbf{1}_{x<0}$ away from zero?
+
+    \item Compute the derivative of $\log(x)$ for $x > 0$ and of $\log(-x)$ for $x < 0$. Use this to verify that the general anti-derivative of $1/x$ on $\mathbb{R} \setminus \{0\}$ is
+    \[
+        F(x) = \begin{cases}
+            \log(x) + c_1 & x > 0 \\
+            \log(-x) + c_2 & x < 0
+        \end{cases}
+    \]
+    where $c_1, c_2 \in \mathbb{R}$ are \emph{independent} constants. Why are two constants needed rather than one?
+
+    \newpage
+
+    \item We now set up an extremely bare bones language for de Rham cohomology on $\mathbb{R} \setminus \{0\}$. These are not the standard definitions, but they are enough to get the main idea across. We have:
+    \begin{itemize}
+        \item A \textbf{$0$-form} is a smooth function $f \colon \mathbb{R} \setminus \{0\} \to \mathbb{R}$.
+        \item A \textbf{$1$-form} is an expression $g(x)\,dx$.
+        \item The \textbf{exterior derivative} acts by $d(f) = f'(x)\,dx$.
+        \item One perspective on the \textbf{zeroth de Rham cohomology} is $H^0_{dR}(\mathbb{R} \setminus \{0\}) = \ker(d) = \{f \mid df = 0\}$. [Optional exercise for experts: explain what is incomplete about this characterisation of $H^0_{dR}$.]
+    \end{itemize}
+    Using part (d), explain why $H^0_{dR}(\mathbb{R} \setminus \{0\}) \cong \mathbb{R} \oplus \mathbb{R}$. What is the geometric meaning of this answer?
+
+\end{enumerate}
+
+% ================================================================
+\newpage
+\section*{Solutions}
+
+Credit: Tom Leinster's Article on the topic and Oscar Cunningham's Stack Exchange answers.
+
+\begin{enumerate}[(a)]
+
+    \item At $x = 0$, the expression $\frac{1}{0}$ is undefined. There is no way to assign a value to $\frac{1}{x}$ at $x = 0$ that makes it continuous, so we must remove $0$ from the domain. The natural domain is therefore $\mathbb{R} \setminus \{0\} = (-\infty, 0) \cup (0, \infty)$.
+
+    \item Since $e^y > 0$ for all $y \in \mathbb{R}$, the equation $e^y = x$ has a solution only when $x > 0$. Thus $\log$ is only defined on $(0, \infty)$. In particular $\log(0)$ and $\log(-1)$ are undefined over the reals.
+
+    \item Removing $0$ splits the real line into exactly two connected components:
+    \[
+        (-\infty,\, 0) \quad \text{and} \quad (0,\, \infty).
+    \]
+    Any path from a negative number to a positive number must cross $0$, which is not in the domain.
+
+    \item If $f'(x) = 0$ on an interval, the Mean Value Theorem forces $f$ to be constant there. On $\mathbb{R} \setminus \{0\}$ there are \emph{two} intervals, so $f$ is constant on each one, but the two constants are independent. For example,
+    \[
+        f(x) = \begin{cases} 6 & x > 0 \\ 7 & x < 0 \end{cases}
+    \]
+    satisfies $f' = 0$ everywhere on $\mathbb{R} \setminus \{0\}$ but is not globally constant.
+
+    \textit{Key point:} the word ``constant'' is ambiguous on a disconnected domain. The precise statement is: $f' = 0$ if and only if $f$ is \emph{locally constant}, i.e.\ constant on each connected component.
+
+    \item The evaluations are:
+
+    \medskip
+    \begin{center}
+    \begin{tabular}{c|cc}
+        $x$ & $\mathbf{1}_{x>0}$ & $\mathbf{1}_{x<0}$ \\ \hline
+        $-2$ & $0$ & $1$ \\
+        $0$  & $0$ & $0$ \\
+        $2$  & $1$ & $0$
+    \end{tabular}
+    \end{center}
+    \medskip
+
+    Away from $0$, exactly one of the two indicators equals $1$ and the other $0$, so their sum is $1$ on $\mathbb{R} \setminus \{0\}$. The two indicators ``see'' opposite components; together they record which component a point belongs to.
+
+    \item For $x > 0$: $\dfrac{d}{dx}\log(x) = \dfrac{1}{x}$. \quad For $x < 0$: $\dfrac{d}{dx}\log(-x) = \dfrac{1}{-x}\cdot(-1) = \dfrac{1}{x}$.
+
+    So in both cases the derivative is $1/x$, confirming $F$ is an antiderivative. Two constants $c_1, c_2$ are needed because the two components are \emph{disconnected}: there is no continuity condition linking them, so each component contributes its own free constant.
+
+    \item A $0$-form $f$ satisfies $df = 0$ iff $f'(x) = 0$ everywhere on $\mathbb{R}\setminus\{0\}$. By part (d), this means $f$ is locally constant: it takes some value $a \in \mathbb{R}$ on $(0,\infty)$ and independently some value $b \in \mathbb{R}$ on $(-\infty,0)$. One can compute:
+    \[
+        H^0_{dR}(\mathbb{R} \setminus \{0\}) \cong \mathbb{R} \oplus \mathbb{R}.
+    \]
+
+    \textbf{Geometric meaning.} The zeroth cohomology counts connected components: one copy of $\mathbb{R}$ per component. The space $\mathbb{R} \setminus \{0\}$ has two components, hence $\mathbb{R}^2$.
+
+   The characterisation of $H^0_{dR}$ as a set $\ker(d)$ is not quite right. It is really (at least) endowed with some algebraic structure. The correct characterisation is $H^0_{dR}(\mathbb{R} \setminus \{0\}) = \ker(d) / \mathrm{im}(d)$, but since there are no $-1$-forms, $\mathrm{im}(d) = 0$, so the two characterisations coincide in this case.
+\end{enumerate}
+
+\end{document}

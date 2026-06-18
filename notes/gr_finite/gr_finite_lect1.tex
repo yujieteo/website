@@ -1,0 +1,229 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\geometry{margin=1in}
+
+\title{Finite Groups - Lecture 1}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+I assume knowledge of group theory. 
+This problem is based on a series of expositions on Sylow theory and group theory by Qiaochu Yuan's blog. 
+I also had in mind a proof provided by \texttt{jagr2808} on Mathematics Discord using these ideas.
+
+\section*{Questions}
+
+\begin{enumerate}[(a)]
+  \item Describe what a finite $p$-group $G$ is and give an example. 
+  Describe what a group action is, 
+  and give an example for a finite $p$-group $G$ acting on a finite set, say $X$.
+  Describe the subset of the finite set $X$ that is fixed by the group action of 
+  a finite $p$-group $G$, this is denoted as $X^G$.
+  \item Let $G$ be a finite $p$-group and $X$ a finite set on which $G$ acts.
+  We will slowly build up to the proof of the following result: that $|X^G| \equiv |X| \pmod {p}$
+  and in particular if $p \nmid |X|$ then $X^G$ is non-empty i.e. $X^G \neq \emptyset$ and the action of $G$ on $X$
+  has a fixed point. (You may prove this now or you may proceed to the next question and come back to this question later.)
+  \item (Exercise for the proof of question (b)): Let $G$ be a finite $p$-group.
+  Describe $X$ as a disjoint union of $G$-orbits and the form of each $G$-orbit as a quotient of $G$ by a subgroup $H$ of $G$. Compute the cardinality of each $G$-orbit and 
+  use this to show that $|X| \equiv |X^G| \pmod{p}$. What does this imply about the existence of certain orbits?
+  What sort of orbits do we have in this case? 
+  What does this say about the fixed points of the group action of $G$ on the set $X$?
+  Hence prove the result in question (b).
+  \item (Cauchy's Theorem) Let $G$ be a finite group and $p$ a prime dividing $|G|$.
+  Then prove that $G$ has an element of order $p$, using $(b)$ by having a finite $p$-group act on a finite set in a clever way. What set is used? Why is its cardinality of this finite set important?
+
+  \item The exercise is to fill in the proof sketch that I saw for the Sylow theorems.
+  
+  (Theorem 1) Consider a $p$-subgroup $P$ of $G$, let $P$ act on $G/P$ by left multiplication. Compute the fixed points. Apply induction and Cauchy's theorem (with some extra work) on these fixed points, and prove that Sylow $p$-subgroups exist.
+  \item (Theorem 3) If $P$ is a Sylow $p$-subgroup of $G$, using the conjugation action on Sylow $p$-subgroups, compute $[G:N_G(P)]$. Hence, compute the number of conjugates of $P$.
+  \item (Theorem 2) Let $P$ and $P'$ be two different Sylow $p$-subgroups. Let $P$ act on $G/P'$ by left multiplication. Compute the number of fixed points and hence show that $P$ and $P'$ are conjugate.
+\end{enumerate}
+
+\newpage
+
+\section*{Solutions}
+
+\begin{enumerate}[(a)]
+
+\item Let $G$ be a finite $p$-group acting on a finite set $X$.
+Decompose $X$ into $G$-orbits:
+\[
+X=\bigsqcup_i Gx_i .
+\]
+For $x\in X$,
+\[
+Gx\cong G/G_x,
+\]
+where
+\[
+G_x=\{g\in G:gx=x\}.
+\]
+Hence
+\[
+|Gx|=[G:G_x],
+\]
+which is a power of $p$.
+
+An orbit has size $1$ precisely when $G_x=G$, i.e. when $x\in X^G$.
+All other orbits have size divisible by $p$. Therefore
+\[
+|X|=|X^G|+\sum_{\text{non-fixed orbits}}|Gx|
+\]
+and hence
+\[
+|X|\equiv |X^G|\pmod p.
+\]
+
+If $p\nmid |X|$, then $|X^G|\not\equiv0\pmod p$, so
+\[
+X^G\neq\emptyset .
+\]
+
+\item Let $G$ act on itself by conjugation:
+\[
+g\cdot x=gxg^{-1}.
+\]
+The fixed points are exactly the center:
+\[
+X^G=Z(G).
+\]
+By the previous result,
+\[
+|Z(G)|\equiv |G|\pmod p.
+\]
+Since $|G|$ is divisible by $p$,
+\[
+p\mid |Z(G)|.
+\]
+As $e\in Z(G)$, we have
+\[
+Z(G)\neq\{e\}.
+\]
+
+Now use induction on $|G|$. Since $Z(G)\neq\{e\}$,
+\[
+|G/Z(G)|<|G|.
+\]
+Also $G/Z(G)$ is a finite $p$-group, so by induction it is nilpotent.
+Hence $G$ is nilpotent.
+
+\item Let $p\mid |G|$ and define
+\[
+X=\{(a_1,\dots,a_p)\in G^p:
+a_1a_2\cdots a_p=e\}.
+\]
+Then
+\[
+|X|=|G|^{p-1}.
+\]
+
+Let $C_p$ act on $X$ by cyclic permutation:
+\[
+(a_1,\dots,a_p)\mapsto(a_2,\dots,a_p,a_1).
+\]
+The fixed points satisfy
+\[
+a_1=\cdots=a_p=a
+\]
+and therefore
+\[
+a^p=e.
+\]
+
+By the fixed point theorem,
+\[
+|X^{C_p}|\equiv |X|\equiv0\pmod p.
+\]
+Since $(e,\dots,e)$ is one fixed point, there is another:
+\[
+(a,\dots,a)
+\]
+with $a\neq e$.
+Thus
+\[
+a^p=e
+\]
+and the order of $a$ is $p$.
+
+\item Let $P$ be a $p$-subgroup of $G$. Let $P$ act on
+\[
+G/P
+\]
+by left multiplication.
+
+A coset $gP$ is fixed exactly when
+\[
+xgP=gP\qquad\forall x\in P,
+\]
+which is equivalent to
+\[
+g^{-1}Pg\subseteq P.
+\]
+Hence
+\[
+(G/P)^P=N_G(P)/P.
+\]
+
+By the fixed point theorem,
+\[
+[N_G(P):P]\equiv[G:P]\pmod p.
+\]
+
+Using induction and Cauchy's theorem on $N_G(P)/P$, one obtains a larger
+$p$-subgroup unless $P$ is maximal. Therefore a maximal $p$-subgroup exists,
+and it is a Sylow $p$-subgroup.
+
+\item Let $P$ be a Sylow $p$-subgroup. The conjugates of $P$ are counted by
+\[
+[G:N_G(P)].
+\]
+
+Also
+\[
+[G:P]=[G:N_G(P)][N_G(P):P].
+\]
+Because $P$ is Sylow,
+\[
+[N_G(P):P]\equiv1\pmod p.
+\]
+Hence
+\[
+[G:N_G(P)]\equiv[G:P]\pmod p.
+\]
+
+Therefore the number of Sylow $p$-subgroups is congruent to
+\[
+[G:P]\pmod p.
+\]
+
+\item Let $P,P'$ be Sylow $p$-subgroups. Let $P$ act on
+\[
+G/P'
+\]
+by left multiplication.
+
+A fixed point satisfies
+\[
+g^{-1}Pg\subseteq P'.
+\]
+Both groups are Sylow $p$-subgroups, so they have the same order, hence
+\[
+g^{-1}Pg=P'.
+\]
+Therefore
+\[
+P'=g^{-1}Pg,
+\]
+so all Sylow $p$-subgroups are conjugate.
+
+\end{enumerate}
+
+\end{document}

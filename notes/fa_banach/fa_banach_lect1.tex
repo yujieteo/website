@@ -1,0 +1,249 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\geometry{margin=1in}
+
+\title{Banach Spaces - Lecture 1}
+\author{}
+\date{}
+
+% ----------------------------------------------------------------
+\begin{document}
+\maketitle
+
+% ================================================================
+
+We present a proof of Pitt's theorem as a warm up.
+The corresponding question is missing. But the proof is essentially all here.
+
+\section*{Part 1. Warm Up}
+
+\begin{itemize}
+    
+
+\item  From the question, let $\alpha = (\alpha_n)$ be a scalar sequence.
+
+\item From the question, define $D_\alpha: \ell^p \rightarrow \ell^q$ by $D_\alpha(x) = (\alpha_n x_n)$ for $x = (x_n) \in \ell^p$.
+
+\item We want to show that $D_\alpha$ is bounded if and only if $\alpha \in \ell^r$, where $\dfrac{1}{r} = \dfrac{1}{q} - \dfrac{1}{p}$.
+
+\item Assume first that $\alpha \in \ell^r$ such that $\dfrac{1}{r} = \dfrac{1}{q} - \dfrac{1}{p}$.
+
+\item By hypothesis on the $D_\alpha: \ell^p \rightarrow \ell^q$, we have that $||D_\alpha x||^q_q = \sum_{n=1}^\infty |\alpha_n|^q |x_n|^q$.
+
+\item By manipulation of conjugate exponents we have $\dfrac{1}{r/q} + \dfrac{1}{p/q} = 1$. This was Cooly's explicit hint.
+
+\item Continuing Cooly's explicit hint, applying H\"older's inequality with conjugate exponents $r/q$ and $p/q$, we have
+\[||D_\alpha x||^q_q \leq \left( \sum_{n=1}^\infty (|\alpha_n|^q)^{r/q} \right)^{q/r} \left( \sum_{n=1}^\infty (|x_n|^q)^{p/q} \right)^{q/p} = ||\alpha||^q_r ||x||^q_p.\]
+
+\item Taking the $q$-th root gives $||D_\alpha x||_q \leq ||\alpha||_r ||x||_p$, so $D_\alpha$ is bounded with operator norm at most $||\alpha||_r$. This gives the converse direction of the equivalence.
+
+\item Assume now that $D_\alpha$ is bounded. We want to show that $\alpha \in \ell^r$.
+This was a big pain for me since we cannot apriori assume $||\alpha||_r < \infty$.
+For each $N$, define
+\[
+x^{(N)}_n=
+\begin{cases}
+|\alpha_n|^{r/p}\operatorname{sgn}(\alpha_n), & n\le N,\\
+0,& n>N.
+\end{cases}
+\]
+
+Let
+\[
+A_N=\sum_{n=1}^N |\alpha_n|^r.
+\]
+
+If $A_N>0$, put
+\[
+y^{(N)}=\frac{x^{(N)}}{A_N^{1/p}}.
+\]
+
+Then $\|y^{(N)}\|_p=1$, and a direct computation using
+\[
+\frac1r=\frac1q-\frac1p
+\]
+shows that
+\[
+\|D_\alpha y^{(N)}\|_q=A_N^{1/r}.
+\]
+
+Since $D_\alpha$ is bounded,
+\[
+A_N^{1/r}
+=
+\|D_\alpha y^{(N)}\|_q
+\le
+\|D_\alpha\|.
+\]
+
+Therefore
+\[
+\sum_{n=1}^N |\alpha_n|^r
+\le
+\|D_\alpha\|^r
+\qquad (N\in\mathbb N).
+\]
+
+Letting $N\to\infty$ gives
+\[
+\sum_{n=1}^\infty |\alpha_n|^r<\infty,
+\]
+hence $\alpha\in\ell^r$.
+
+The condition is required for H\"older's inequality to apply, so the forward direction is also true.
+
+Since $(I - P_N)D_\alpha = D_{(0,\ldots,0, \alpha_{N+1}, \alpha_{N+2}, \ldots)}$ we get
+\[
+\|(I - P_N)D_\alpha\|_{\ell^p \to \ell^q} = \|(0, \dots, 0, \alpha_{N+1}, \alpha_{N+2}, \dots)\|_r = \|(\alpha_{N+1}, \alpha_{N+2}, \dots)\|_r
+\]
+
+This tells us that the tail of the sequence $\alpha$ must vanish as $N \to \infty$, so the theorem holds for diagonal operators.
+
+\end{itemize}
+
+\section*{Part 2.}
+
+\begin{itemize}
+    \item Let $K \subset \ell^q$ be a relatively compact set in $\ell^q$. Then, it is totally bounded since by definition, its closure is compact and subsets of compact sets are totally bounded. Note that $\ell^q$ is a complete metric space.
+    \item By one characterisation of total boundedness, for any arbitrarily small $\epsilon > 0$, there exists a finite $\epsilon/2$-net for $K$. This means we can choose finitely many vectors $y_1, \dots, y_N \in K$ such that $K$ is contained in the union of finitely many balls of radius $\epsilon/2$ centered at $y_1, \dots, y_N$.
+    \item Since each $y_i$ is in $\ell^q$ by assumption, we can choose $N$ such that $||(I - P_N)y_i||_q < \epsilon/2$.
+    If $y \in K$, then pick $y_i$ such that $||y - y_i||_q < \epsilon/2$. 
+    \item By the triangle inequality, $||(I-P_N)y||_q < \epsilon$. This proves the forward direction of the statement.
+    \item For the converse, choose $N$ such that the $\mathrm{sup} ||(I - P_N)y_i||_q < \epsilon$, this allows us to reduce to the case of $P_N(K)$ in a finite dimensional subspace of $\ell^q$. 
+    \item Using the above, consider $P_N(K)$ as a bounded subset of a finite dimensional subspace of $\mathbb{R}^N$. (our goal is to use the Heine-Borel theorem) Take the closure of this projection. 
+    \item We use the following result without proof: the closure of the projection is closed and bounded since the closure of a bounded set remains bounded.
+    \item By the Heine-Borel theorem, which we use without proof, the closure of $P_N(K)$ is compact and this is OK since we are working in $\mathbb{R}^N$.
+    \item Using a definition of relative compactness, this implies $P_N(K)$ is relatively compact since its closure is compact, and we have $P_N(K)$ to be totally bounded.
+    \item By one characterisation of total boundedness, for any arbitrarily small $\epsilon > 0$, there exists a finite $\epsilon/2$-net for $P_N(K)$. This means we can choose finitely many vectors $z_1, \dots, z_N \in P_N(K)$ such that $P_N(K)$ is contained in the union of finitely many balls of radius $\epsilon/2$ (dummy variable, lazy to change) centered at $z_1, \dots, z_N$.
+    \item Since $P_N(K)$ is bounded, the $z_i$ form and $\epsilon/2$-net of $P_N(K)$, we can choose $z_i$ such that we have $||P_N y - z_i||_q < \epsilon/2$.
+    \item By the triangle inequality, for any $y \in K$, we have $z_i$ such that $||y - z_i||_q < \epsilon$, by using the previous step and noting that $||(I - P_N)z_i||_q < \epsilon/2$ as hypothesis.
+    \item Since the $z_i$ forms a finite $\epsilon$-net, $K$ is totally bounded.
+    \item Since $K$ is totally bounded, it is relatively compact. This proves the converse direction of the statement.
+    \item We compare this to the original problem. Therefore, we simply need to show the image of $T$ of the unit ball is relatively compact in $\ell^q$.
+\end{itemize}
+
+\section*{Part 3.}
+
+\begin{itemize}
+    \item From the question, let $1 \leq r < \infty$. Suppose $u_n \to 0$ weakly in $\ell^r$. Fix $a \in \ell^r$, and consider the case for $a$ with finite support.
+    \item By hypothesis of finite support, suppose $a_k = 0$ for all $k > M$. We split the norm into two parts:
+    \[
+       ||a+u_n||^r_r = \sum_{k=1}^M |a_k + u_{n,k}|^r + \sum_{k=M+1}^\infty |u_{n,k}|^r.
+    \]
+    \item By hypothesis of the question, we have $u_n \to 0$ weakly in $\ell^r$. Then we have $u_{n,k}$ having coordinate-wise convergence to $0$ for each $k$.
+    \item By examining the first part of the split of the norm, this reduces the part within the support to $||a||^r_r$, which is what we want later.
+    \item For the part outside of the support, rewrite it in terms of total norm of $u_n$ (we want to use the hypothesis of weak convergence later) so that:
+    \[
+       \sum_{k=M+1}^\infty |u_{n,k}|^r = ||u_n||^r_r - \sum_{k=1}^M |u_{n,k}|^r.
+    \]
+    \item For the norm split into two parts, take limit supremum on both sides, use the weak convergence of $u_n \to 0$ weakly in $\ell^r$ to kill off the term involving $u_n$. Then we have $u_{n,k}$ having coordinate wise convergence to $0$:
+    \[
+       \limsup_{n \to \infty} ||a+u_n||^r_r
+       = ||a||^r_r + \limsup_{n \to \infty} ||u_n||^r_r.
+    \]
+    which is our desired result for the case of finite support.
+    \item Now take a general $a \in \ell^r$. We can approximate $a$ by a sequence of finite support vectors $a^m$ such that $||a - a^m||_r \to 0$ as $m \to \infty$. Apply the finite support result to $a^m$ and pass to the limit as $m \to \infty$ to get the desired result for general $a$.
+\end{itemize}
+
+\section*{Part 4.}
+
+\begin{itemize}
+    \item Using the Cooly hint, suppose for the sake of contradiction $||T h_n||_q \not\to 0$ as $n \to \infty$. Without loss of generality, for some subsequence (it inherits weak convergence), we can assume $||T h_n||_q > L$ for some $L > 0$ and all $n$.
+    \item Using the hypothesis that $(h_n)$ is bounded, there exists an $M > 0$ such that $||h_n||_p < M$ for all $n$.
+    \item Since $||T|| = 1$ by normalisation, pick a unit vector $x$ in $\ell^p$ such that $T$ nearly attains its norm i.e. $||T x||_q > 1 - \epsilon$. Using the hint, perturb it with small $h_n$, consider the case $||T(x+th_n)||_q = ||Tx + t T h_n||$.
+    \item The weakly null sequence $(h_n)$ satisfies the hypotheses, work in the domain space $\ell^p$:
+    \[
+    \limsup_{n \to \infty} \|x + t h_n\|_p^p = \|x\|_p^p + t^p \limsup_{n \to \infty} \|h_n\|_p^p \leq \|x\|_p^p + t^p M^p
+    \]
+    \item Using the hypothesis that $T$ is a bounded linear operator, and $1 \leq q$, and we use the fact that bounded linear operators map weakly null sequences to weakly null sequences, now we can work in the image space $\ell^q$,and apply part 3 again. Apply the first Cooly hint for contradiction to make an assumption on $L$, and apply the other Cooly hint and have $T$ nearly obtain its norm, this gives the bound:
+    \[
+    \limsup_{n \to \infty} \|T x + t T h_n\|_q^q = \|Tx\|_q^q + t^q \limsup_{n \to \infty} \|Th_n\|_q^q \geq 
+    (1 - \epsilon)^q + t^q L^q
+    \] 
+    On the other hand,
+    \[
+    \|Tx+tTh_n\|_q
+    =
+    \|T(x+th_n)\|_q
+    \le
+    \|T\|\,\|x+th_n\|_p
+    =
+    \|x+th_n\|_p,
+    \]
+    since $\|T\|=1$.
+
+    Taking $\limsup$ and using the estimate obtained in the domain space gives
+    \[
+    \limsup_{n\to\infty}\|Tx+tTh_n\|_q^q
+    \le
+    \left(
+    1+t^pM^p
+    \right)^{q/p}.
+    \]
+
+    Combining the two inequalities yields
+    \[
+    (1-\varepsilon)^q+t^qL^q
+    \le
+    (1+t^pM^p)^{q/p}.
+    \]
+    \item Use the normalisation $||T|| = 1$ and our definition of $M$, we have by cheating and looking at what we want for part 5:
+    \[
+        (1 - \epsilon)^q + t^q L^q \leq (1 + t^p M^p)^{q/p}
+    \]
+    \item Isolate $L^q$, we get:
+    \[
+    L^q
+    \le
+        \frac{(1+t^pM^p)^{q/p}-(1-\varepsilon)^q}{t^q}.
+     \]
+    \item Looking at Part 5, we just need to show $L$ = 0, get contradiction that $L > 0$. Assume part 5 holds, we will have proven Part 4.
+\end{itemize}
+
+\newpage
+
+\section*{Part 5}
+
+\begin{itemize}
+    \item Assume $0 < q < p < \infty$ and $L \geq 0$. We have \[
+    L^q
+    \le
+        \frac{(1+t^pM^p)^{q/p}-(1-\varepsilon)^q}{t^q}.
+     \]
+    we want to show $L = 0$.
+    \item Fix $t > 0$ without loss of generality, let $\epsilon \rightarrow 0^+$
+    \[
+    L^q
+    \le
+        \frac{(1+t^pM^p)^{q/p}-1}{t^q}.
+    \]
+    \item For small $t$, Taylor's expansion gives $(1+t^pM^p)^{q/p} = 1 + \dfrac{q}{p} M^p t^p + o(t^p)$
+    Reduce to $L^q \leq C t^{p-q} + o(t^{p-q})$.
+    \item By hypothesis $p - q > 0$, let $t \rightarrow 0$ gives $L^q = 0$ so $L = 0$.
+    \item Part 4 is proven as well.
+\end{itemize}
+
+\section*{Part 6}
+
+\begin{itemize}
+    \item From the main statement $1 < q < p < \infty$, $\ell^p$ is reflexive. Using a characterisation of the Banach-Alaoglu theorem, a corollary is that every bounded set in a reflexive Banach space is relatively weakly compact. We just need that every bounded sequence has a weakly convergent subsequence.
+    \item By part 2, it suffices to show that the image of operator $T$ of the unit ball (denote $K$) is relatively compact in $\ell^q$.
+    \item Consider $(y_n)$ in $K$, say $y_n = T x_n$ with $||x_n||_p < 1$. By the reflexivity of $\ell^p$ there is a subsequence $x_{n_k}$ weakly converging to $x$ in $\ell^p$. 
+    \item Set $h_k := x_{n_k} - x$. Then $h_k$ tends to $0$ weakly in $\ell^p$ by linearity and $(h_k)$ is bounded. We can apply parts $4$ and $5$ (normalise if needed):
+    \[
+    \|Tx_{n_k}-Tx\|_q
+    =
+    \|Th_k\|_q
+    \to 0.
+    \]
+    So the subsequence $y_{n_k} = T x_{n_k}$ converges to $Tx$ in $\ell^q$, every sequence in $K$ has a convergent subsequence, $K$ is sequentially relatively compact, and in a metric space, therefore relatively compact.
+    \item By part 2, the theorem is proved.
+\end{itemize}
+
+\end{document}

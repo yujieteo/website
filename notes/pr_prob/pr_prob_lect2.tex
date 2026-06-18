@@ -1,0 +1,247 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\geometry{margin=1in}
+
+\title{Probability Theory - Lecture 2}
+\author{}
+\date{}
+
+% ----------------------------------------------------------------
+\begin{document}
+\maketitle
+
+One of the most basic principles in probability is:
+
+\begin{center}
+``The probability that at least one bad thing happens
+is at most the sum of the probabilities of the bad things.''
+\end{center}
+
+This is called \textit{Boole's inequality}, or the \textit{union bound}.
+It appears constantly in combinatorics, probability, computer science,
+and additive combinatorics.
+
+In this problem, we will derive it carefully from counting.
+
+% ================================================================
+\section*{Questions}
+
+\begin{enumerate}[(a)]
+
+\item Let $A$ and $B$ be finite sets.
+Explain why
+\[
+|A\cup B|
+=
+|A|+|B|-|A\cap B|.
+\]
+
+\item Deduce that
+\[
+|A\cup B|
+\leq
+|A|+|B|.
+\]
+
+\item Let $A_1,A_2,\dots,A_n$ be finite sets.
+Explain why
+\[
+\left|\bigcup_{i=1}^n A_i\right|
+\leq
+\sum_{i=1}^n |A_i|.
+\]
+
+(Hint: elements appearing in several sets get counted several times on the right-hand side.)
+
+\item Suppose now that $S$ is a finite sample space with all outcomes equally likely.
+If $E\subseteq S$ is an event, recall that
+\[
+\mathbb{P}(E)=\frac{|E|}{|S|}.
+\]
+
+Use part (c) to show that
+\[
+\mathbb{P}\left(\bigcup_{i=1}^n E_i\right)
+\leq
+\sum_{i=1}^n \mathbb{P}(E_i).
+\]
+
+\item Suppose a student takes $5$ exams.
+For each exam, the probability of failing is at most $0.01$.
+
+Show that the probability the student fails at least one exam is at most $0.05$.
+
+\item A graph on $n$ vertices has edge set $E(X)$.
+Suppose each edge independently survives with probability $p$.
+
+For each edge $e$, let $E_e$ be the event that the edge survives.
+
+Use Boole's inequality to show that the probability that at least one edge survives is at most
+\[
+|E(X)|p.
+\]
+
+\item Why can Boole's inequality be very wasteful when many events overlap heavily?
+
+\item Give an example where equality holds in Boole's inequality.
+
+\end{enumerate}
+
+% ================================================================
+\newpage
+\section*{Solutions}
+
+\begin{enumerate}[(a)]
+
+\item When adding $|A|+|B|$, every element in $A\cap B$
+gets counted twice:
+once in $A$ and once in $B$.
+
+Therefore we subtract $|A\cap B|$ once to correct this:
+\[
+|A\cup B|
+=
+|A|+|B|-|A\cap B|.
+\]
+
+\item Since
+\[
+|A\cap B|\geq 0,
+\]
+we have
+\[
+|A\cup B|
+=
+|A|+|B|-|A\cap B|
+\leq
+|A|+|B|.
+\]
+
+\item Every element belonging to at least one set $A_i$
+is counted at least once in
+\[
+\sum_{i=1}^n |A_i|.
+\]
+
+If an element belongs to several sets,
+it is counted several times on the right-hand side.
+
+Hence the right-hand side can only be larger:
+\[
+\left|\bigcup_{i=1}^n A_i\right|
+\leq
+\sum_{i=1}^n |A_i|.
+\]
+
+\item By definition,
+\[
+\mathbb{P}(E_i)=\frac{|E_i|}{|S|}.
+\]
+
+Applying part (c),
+\[
+\left|\bigcup_{i=1}^n E_i\right|
+\leq
+\sum_{i=1}^n |E_i|.
+\]
+
+Dividing both sides by $|S|$ gives
+\[
+\mathbb{P}\left(\bigcup_{i=1}^n E_i\right)
+=
+\frac{\left|\bigcup E_i\right|}{|S|}
+\leq
+\frac{\sum |E_i|}{|S|}
+=
+\sum_{i=1}^n \mathbb{P}(E_i).
+\]
+
+This is Boole's inequality.
+
+\item Let $E_i$ be the event that the student fails exam $i$.
+
+Then
+\[
+\mathbb{P}(E_i)\leq 0.01
+\]
+for each $i$.
+
+Hence by Boole's inequality,
+\[
+\mathbb{P}\left(\bigcup_{i=1}^5 E_i\right)
+\leq
+\sum_{i=1}^5 \mathbb{P}(E_i)
+\leq
+5(0.01)
+=
+0.05.
+\]
+
+\item Let
+\[
+F=\bigcup_{e\in E(X)} E_e
+\]
+be the event that at least one edge survives.
+
+Applying Boole's inequality,
+\[
+\mathbb{P}(F)
+\leq
+\sum_{e\in E(X)} \mathbb{P}(E_e).
+\]
+
+Since each edge survives with probability $p$,
+\[
+\mathbb{P}(E_e)=p.
+\]
+
+Therefore
+\[
+\mathbb{P}(F)
+\leq
+\sum_{e\in E(X)} p
+=
+|E(X)|p.
+\]
+
+\item If many events overlap,
+then the same outcomes get counted repeatedly in
+\[
+\sum_i \mathbb{P}(E_i).
+\]
+
+Thus the right-hand side may greatly overestimate the true probability of the union.
+
+\item Equality holds when the events are pairwise disjoint.
+
+For example, if
+\[
+E_1=\{1\},
+\qquad
+E_2=\{2\}
+\]
+inside the sample space
+\[
+S=\{1,2,3,4\},
+\]
+then
+\[
+\mathbb{P}(E_1\cup E_2)
+=
+\frac{2}{4}
+=
+\frac14+\frac14
+=
+\mathbb{P}(E_1)+\mathbb{P}(E_2).
+\]
+\qed
+
+\end{enumerate}
+
+\end{document}

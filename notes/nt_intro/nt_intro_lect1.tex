@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\geometry{margin=1in}
+
+\title{Introduction to Number Theory - Lecture 1}
+\author{}
+\date{}
+
+% ----------------------------------------------------------------
+\begin{document}
+\maketitle
+
+I wanted to give a simple and fun problem for everyone that is still quite interesting
+and neat to me. This problem is not original and fairly routine.
+But, it is a nice example of how to use algebraic techniques to solve a number theory problem.  
+
+We want to find all integer solutions to:
+\[
+  x^2 + y^2 = z^2.
+\]
+
+% ================================================================
+\section*{Questions}
+
+\begin{enumerate}[(a)]
+
+  \item Why can we assume without loss of generality that $x$, $y$, and $z$
+        are coprime, i.e.\ the greatest common factor of the three integers
+        is $1$?
+
+  \item Compute the residue classes of $x^2$, $y^2$, and $z^2$ modulo $4$.
+        (\textit{Hint: consider the squares of each residue class mod~$4$.})
+
+        \begin{enumerate}[(i)]
+          \item Compute $0^2 \bmod 4$.
+          \item Compute $1^2 \bmod 4$.
+          \item Compute $2^2 \bmod 4$.
+          \item Compute $3^2 \bmod 4$.
+        \end{enumerate}
+
+  \item Notice that $x$, $y$, and $z$ cannot all be even.  Assuming $z$ is
+        odd, why can we assume $y$ to be odd and $x$ to be even?
+
+  \item State the identity used to rearrange the equation
+        $y^2 = (z - x)(z + x)$.  Why are $(z - x)$ and $(z + x)$ coprime? 
+        (Hint: compute the sum and difference of $z+x$ and $z-x$.)
+
+  \item Why are $(z - x)$ and $(z + x)$ squares of integers (up to sign)? 
+        (Hint: work out some concrete examples and perform prime factorisations)
+        Assuming $(z - x) = r^2$ and $(z + x) = s^2$, proceed to the next
+        part.
+
+  \item Solve for expressions for $x$, $y$, and $z$ in terms of $r$ and
+        $s$. (Hint: compute the sum and difference of $z+x$ and $z-x$.)
+
+  \item Using your expressions from~(f) and the necessary conditions on $r$
+        and $s$, compute a concrete Pythagorean triple.
+
+\end{enumerate}
+
+% ================================================================
+\newpage
+\section*{Solutions}
+
+Credit: R.\ Borcherds,
+\href{https://www.youtube.com/watch?v=JZKDmTIFR7A&list}{\textit{YouTube
+lecture on Pythagorean triples}}.
+
+\begin{enumerate}[(a)]
+
+  \item We can divide out the greatest common divisor of $x$, $y$, $z$
+        throughout: if $d = \gcd(x,y,z)$, then $(x/d,\, y/d,\, z/d)$ is
+        again an integer solution, and the new triple is coprime.
+
+  \item Every integer is congruent to $0$, $1$, $2$, or $3$ modulo~$4$.
+        \begin{enumerate}[(i)]
+          \item $0^2 = 0 \equiv 0 \pmod{4}$.
+          \item $1^2 = 1 \equiv 1 \pmod{4}$.
+          \item $2^2 = 4 \equiv 0 \pmod{4}$.
+          \item $3^2 = 9 \equiv 1 \pmod{4}$.
+        \end{enumerate}
+        Hence every perfect square is congruent to $0$ or $1$ modulo~$4$.
+
+  \item Since $x^2 + y^2 = z^2$ holds in a commutative ring, and the
+        equation is symmetric in $x$ and $y$, we may freely swap $x$ and
+        $y$.  Given that $z$ is odd ($z^2 \equiv 1 \pmod 4$), the
+        left-hand side must also be $\equiv 1 \pmod 4$, which forces exactly
+        one of $x^2,\, y^2$ to be $\equiv 1$ and the other $\equiv 0
+        \pmod 4$.  Thus one of $x,y$ is odd and the other even; we label the
+        odd one $y$ and the even one $x$.
+
+  \item The factorisation is
+        \[
+          y^2 = z^2 - x^2 = (z + x)(z - x).
+        \]
+        Since $\gcd(x,z)=1$ (they are part of a coprime triple), any common
+        factor of $(z+x)$ and $(z-x)$ must divide both their sum $2z$ and
+        their difference $2x$, hence it divides $\gcd(2z,2x)=2$.  Because
+        $z$ is odd and $x$ is even, $z+x$ and $z-x$ are both odd, so $2$
+        does not divide them.  Therefore $\gcd(z+x,\, z-x)=1$.
+
+  \item We have two coprime positive integers $(z-x)$ and $(z+x)$ whose
+        product is the perfect square $y^2$.  If two coprime integers have a
+        product that is a perfect square, each of them must individually be a
+        perfect square (up to sign).  Hence $z - x = r^2$ and $z + x = s^2$
+        for some positive integers $r$ and $s$.
+
+      Let \(a = z-x\) and \(b = z+x\). Then \(ab = y^2\) and \(\gcd(a,b)=1\).
+
+      We use the key fact:
+      \emph{if a prime divides a perfect square, it appears an even number of times.}
+
+      Take any prime \(p\) dividing \(a\). Since \(\gcd(a,b)=1\), the prime \(p\) does not divide \(b\). Hence all occurrences of \(p\) in \(ab=y^2\) come entirely from \(a\).
+
+      But in \(y^2\), every prime occurs an even number of times. Therefore \(p\) occurs an even number of times in \(a\). Since this holds for every prime dividing \(a\), \(a\) is a perfect square. So \(a=r^2\).
+
+      The same argument applies to \(b\), so \(b=s^2\).
+
+      Thus,
+      \[
+      z-x=r^2,\qquad z+x=s^2.
+      \]
+
+  \item Adding and subtracting the two equations $z - x = r^2$ and
+        $z + x = s^2$ gives
+        \[
+          z = \frac{s^2 + r^2}{2}, \qquad
+          x = \frac{s^2 - r^2}{2}, \qquad
+          y = rs.
+        \]
+      Let \( r,s \in \mathbb{Z} \) be odd. Then there exist integers \( a,b \in \mathbb{Z} \) such that
+      \[
+      r = 2a+1, \qquad s = 2b+1.
+      \]
+      Squaring gives
+      \[
+      r^2 = (2a+1)^2 = 4a^2 + 4a + 1 = 2(2a^2 + 2a) + 1,
+      \]
+      so \( r^2 \equiv 1 \pmod{2} \). Similarly,
+      \[
+      s^2 = (2b+1)^2 = 4b^2 + 4b + 1 = 2(2b^2 + 2b) + 1,
+      \]
+      so \( s^2 \equiv 1 \pmod{2} \).
+
+      Hence,
+      \[
+      r^2 + s^2 \equiv 1 + 1 \equiv 0 \pmod{2},
+      \]
+      so \( r^2 + s^2 \) is even.
+
+      Also,
+      \[
+      s^2 - r^2 \equiv 1 - 1 \equiv 0 \pmod{2},
+      \]
+      so \( s^2 - r^2 \) is even as well.
+
+      Therefore both \( r^2 + s^2 \) and \( s^2 - r^2 \) are divisible by \(2\), and hence
+      \[
+      \frac{r^2 + s^2}{2}, \quad \frac{s^2 - r^2}{2} \in \mathbb{Z}.
+      \]
+
+  \item Take $r = 1$, $s = 3$ (odd, $\gcd(r,s)=1$).  Then
+        \[
+          x = \frac{9-1}{2} = 4, \qquad
+          y = 1 \cdot 3 = 3, \qquad
+          z = \frac{9+1}{2} = 5.
+        \]
+        Indeed, $3^2 + 4^2 = 9 + 16 = 25 = 5^2$. \qed
+
+\end{enumerate}
+
+\end{document}

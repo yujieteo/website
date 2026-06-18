@@ -1,0 +1,163 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\geometry{margin=1in}
+
+\title{Basic Proofs - Lecture 1}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+An integer is \textit{even} if it equals $2k$ for some integer $k$,
+and \textit{odd} if it equals $2k+1$ for some integer $k$.
+Despite their simplicity, even and odd numbers are a natural
+testing ground for many fundamental proof techniques.
+
+\section*{Questions}
+
+\begin{enumerate}[(a)]
+
+\item \textbf{(Direct proof.)}
+Let $m$ and $n$ be even integers.
+Prove that $m + n$ is even.
+
+\item \textbf{(Contrapositive.)}
+Prove: if\/ $n^2$ is even, then $n$ is even.
+
+\noindent
+(Hint: it may be easier to prove the contrapositive.)
+
+\item \textbf{(Contradiction.)}
+Prove that no integer can be both even and odd.
+
+\item \textbf{(Exhaustion of cases.)}
+Prove that for every integer $n$, the product $n(n+1)$ is even.
+
+\noindent
+(Hint: consider separately the case that $n$ is even
+and the case that $n$ is odd.)
+
+\item \textbf{(Existence.)}
+Prove that there exists a positive even integer that is not divisible
+by~$4$.
+
+\item \textbf{(Counterexample.)}
+Use part~(e) to disprove the following statement:
+
+\begin{center}
+``For every positive integer $n$,
+if\/ $4 \mid n^2$ then $4 \mid n$.''
+\end{center}
+
+\item \textbf{(Weak Induction)}
+Let $P(n)$ be the statement that $1 + 2 + \dots + n = \frac{n(n+1)}{2}$. 
+Prove $P(n)$ for all $n \in \mathbb{Z}^+$.
+
+\item \textbf{(Strong Induction)}
+Prove that every integer $n \geq 2$ can be written as a product of primes.
+
+\item \textbf{Challenge for ALL: give a single
+problem and a proof not just use, but demonstrates ALL the eight techniques in a crucial way above. 
+Another challenge is to do the problem statement in less than 50-100 words, and in other topics.
+Post it in the Problem Archive!}
+
+\item Challenge: prove strong induction using weak induction, and vice versa.
+
+\end{enumerate}
+
+\newpage
+\section*{Solutions}
+
+\begin{enumerate}[(a)]
+
+\item Since $m$ and $n$ are even, write $m = 2a$ and $n = 2b$
+for integers $a$ and $b$.
+Then
+\[
+  m + n = 2a + 2b = 2(a+b).
+\]
+Since $a + b$ is an integer, $m + n$ is even.
+\qed
+
+\item We prove the contrapositive:
+\begin{center}
+  \textit{if $n$ is odd, then $n^2$ is odd.}
+\end{center}
+Suppose $n$ is odd, so $n = 2k+1$ for some integer $k$.
+Then
+\[
+  n^2 = (2k+1)^2 = 4k^2 + 4k + 1 = 2(2k^2+2k) + 1,
+\]
+which is odd.
+Hence the contrapositive holds, so the original statement holds.
+\qed
+
+\item Suppose for contradiction that some integer $n$ is both even
+and odd.
+Then $n = 2a$ and $n = 2b+1$ for some integers $a$ and $b$.
+Equating these,
+\[
+  2a = 2b + 1
+  \quad\Longrightarrow\quad
+  2(a - b) = 1.
+\]
+The left side is divisible by $2$, but the right side is not.
+This is a contradiction.
+\qed
+
+\item We consider two cases.
+
+\medskip
+\textit{Case 1: $n$ is even.}
+Then $n = 2k$, so $n(n+1) = 2k(n+1)$, which is divisible by $2$.
+
+\medskip
+\textit{Case 2: $n$ is odd.}
+Then $n+1$ is even, so $n+1 = 2k$, giving $n(n+1) = 2kn$,
+which is divisible by $2$.
+
+\medskip
+In both cases $n(n+1)$ is even, and these two cases are exhaustive.
+\qed
+
+\item Take $n = 2$.
+Then $n = 2$ is even, and $4 \nmid 2$ since
+$2 = 4 \cdot \tfrac{1}{2}$ and $\tfrac{1}{2}$ is not an integer.
+\qed
+
+\item By part~(e), the integer $n = 2$ is even and satisfies
+$4 \nmid 2$.
+However,
+\[
+  n^2 = 4, \qquad \text{and} \qquad 4 \mid 4.
+\]
+So $4 \mid n^2$ but $4 \nmid n$, which disproves the statement.
+\qed
+
+\item \textbf{Base Case:} For $n=1$, the left side is $1$ and the right side is $\frac{1(1+1)}{2} = 1$. The base case holds. \\
+\textbf{Inductive Step:} Assume $P(k)$ is true for some $k \geq 1$. That is,
+\[ 1 + 2 + \dots + k = \frac{k(k+1)}{2} \]
+We want to show $P(k+1)$ is true:
+\begin{align*}
+1 + 2 + \dots + k + (k+1) &= \frac{k(k+1)}{2} + (k+1) \\
+&= (k+1) \left( \frac{k}{2} + 1 \right) \\
+&= \frac{(k+1)(k+2)}{2}.
+\end{align*}
+This is the formula for $P(k+1)$. Thus, by weak induction, $P(n)$ holds for all $n \in \mathbb{Z}^+$.
+
+\item
+\textbf{Base Case:} $n=2$ is prime, so it is a product of one prime. \\
+\textbf{Inductive Step:} Assume that for some $k \geq 2$, the statement is true for all integers $i$ such that $2 \leq i \leq k$. We show it must hold for $k+1$. \\
+\textit{Case 1:} $k+1$ is prime. Then the statement holds trivially. \\
+\textit{Case 2:} $k+1$ is composite. Then $k+1 = ab$ for integers $a, b$ where $2 \leq a, b \leq k$. By the strong inductive hypothesis, both $a$ and $b$ can be written as products of primes. Therefore, their product $ab = k+1$ is also a product of primes. \\
+By strong induction, the statement holds for all $n \geq 2$.
+
+\end{enumerate}
+\end{document}

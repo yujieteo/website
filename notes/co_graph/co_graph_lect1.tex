@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\geometry{margin=1in}
+
+\title{Graph Theory - Lecture 1}
+\author{}
+\date{}
+
+% ----------------------------------------------------------------
+\begin{document}
+\maketitle
+
+The AM-GM inequality is a very common tool in many an analyst's or combinatorialist's toolkit.
+In this problem, we will see how it can be used to prove a very routine bound on edges in bipartite graphs.
+
+% ================================================================
+\section*{Questions}
+
+\begin{enumerate}[(a)]
+
+  \item Let $x$ and $y$ be nonnegative real numbers. Expand $(\sqrt{x} + \sqrt{y})^2$.
+  \item Explain why $(\sqrt{x} + \sqrt{y})^2 \geq 0$.
+  \item By shifting terms around, and doing it a little bit more than usual, show that $x + y \geq 2\sqrt{xy}$. Then, deduce the Arithmetic Mean-Geometric Mean inequality,
+  which states that $\dfrac{x+y}{2} \geq \sqrt{xy}$. (Hint: I slipped a trap at the start. You may also need to redo exercise (a) and (b).)
+  \item Show that $\left(\dfrac{x+y}{2}\right)^2 \geq xy$.
+  \item A graph $X$ has a vertex set $V(X)$ and an edge set $E(X)$. A \textit{bipartite graph}
+  is a graph whose vertex set can be partitioned into two sets $A$ and $B$,
+  such that every edge has one endpoint in $A$ and one in $B$.
+  We will show that if $X$ is a bipartite graph with $n$ vertices,
+  then $|E(X)| \leq \dfrac{n^2}{4}$.
+  \item Compute $|A| + |B|$ in terms of $n$.
+  \item Write down the maximum number of edges between $A$ and $B$, in terms of $|A|$ and $|B|$.
+  \item Compute $\dfrac{(|A|+|B|)^2}{4}$ for a bipartite graph with $n$ vertices.
+  \item Using the previous parts, show that $|E(X)| \leq \dfrac{n^2}{4}$.
+
+\end{enumerate}
+
+% ================================================================
+\newpage
+\section*{Solutions}
+
+Credit: Wikipedia and my teachers.
+
+\begin{enumerate}[(a)]
+
+  \item Expand by first in last out:
+  \[
+    (\sqrt{x}+\sqrt{y})^2 = x + 2\sqrt{xy} + y.
+  \]
+
+  \item Since $\sqrt{x}$ and $\sqrt{y}$ are real numbers, their sum $\sqrt{x}+\sqrt{y}$ is real,
+  and any real number squared is nonnegative. Hence $(\sqrt{x}+\sqrt{y})^2 \geq 0$.
+
+  \item From (b), $x + 2\sqrt{xy} + y \geq 0$, so
+  \[
+    x + y \geq -2\sqrt{xy}.
+  \]
+  Since both sides of $x+y \geq 2\sqrt{xy}$ follow from part (a):
+  we have $(\sqrt{x}+\sqrt{y})^2 \geq 0$, which expands to $x+y+2\sqrt{xy}\geq 0$,
+  but more directly, using the hint and checking quickly, $(\sqrt{x}-\sqrt{y})^2 \geq 0$ gives
+  \[
+    x - 2\sqrt{xy} + y \geq 0 \implies x+y \geq 2\sqrt{xy}.
+  \]
+  Dividing both sides by $2$ yields the AM-GM inequality:
+  \[
+    \frac{x+y}{2} \geq \sqrt{xy}.
+  \]
+
+  \item Squaring both sides of the AM-GM inequality (both sides are nonneg\-ative, so
+  squaring preserves the inequality):
+  \[
+    \left(\frac{x+y}{2}\right)^2 \geq \left(\sqrt{xy}\right)^2 = xy.
+  \]
+
+  \item See the problem statement above.
+
+  \item Since $\{A,B\}$ partitions $V(X)$, every vertex belongs to exactly one of $A$ or $B$, so
+  \[
+    |A| + |B| = n.
+  \]
+
+  \item Each vertex in $A$ can be connected to at most every vertex in $B$, and vice versa.
+  Since edges only go between $A$ and $B$, the maximum number of edges is
+  \[
+    |A| \cdot |B|.
+  \]
+
+  \item Substituting $|A|+|B|=n$:
+  \[
+    \frac{(|A|+|B|)^2}{4} = \frac{n^2}{4}.
+  \]
+
+  \item From (g), $|E(X)| \leq |A|\cdot|B|$. From (d) applied with $x = |A|$ and $y = |B|$,
+  \[
+    |A|\cdot|B| \leq \left(\frac{|A|+|B|}{2}\right)^2 = \frac{n^2}{4}.
+  \]
+  Chaining these two inequalities gives $|E(X)| \leq \dfrac{n^2}{4}$. \qed
+
+\end{enumerate}
+
+\end{document}

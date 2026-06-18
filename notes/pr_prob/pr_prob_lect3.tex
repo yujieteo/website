@@ -1,0 +1,282 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\geometry{margin=1in}
+
+\title{Probability Theory - Lecture 3}
+\author{}
+\date{}
+
+% ----------------------------------------------------------------
+\begin{document}
+\maketitle
+
+One of the central ideas in analysis and probability is that
+``averaging inputs'' and ``applying a nonlinear function''
+do not usually commute.
+
+Convex functions bend upward,
+and because of this,
+applying the function after averaging often gives a smaller answer
+than averaging after applying the function.
+
+This phenomenon is captured by \textit{Jensen's inequality}.
+
+In this problem, we will prove the simplest finite version.
+
+% ================================================================
+\section*{Questions}
+
+\begin{enumerate}[(a)]
+
+\item Expand:
+\[
+(x-y)^2.
+\]
+
+\item Explain why
+\[
+(x-y)^2 \geq 0.
+\]
+
+\item Rearrange the previous inequality to show that
+\[
+x^2+y^2 \geq 2xy.
+\]
+
+\item Show that
+\[
+x^2+y^2
+\geq
+\frac{(x+y)^2}{2}.
+\]
+
+(Hint: expand $(x+y)^2$.)
+
+\item Divide both sides by $2$ to deduce that
+\[
+\frac{x^2+y^2}{2}
+\geq
+\left(\frac{x+y}{2}\right)^2.
+\]
+
+\item Explain in words what the previous inequality says.
+
+\item Let
+\[
+f(x)=x^2.
+\]
+Rewrite part (e) in the form
+\[
+\frac{f(x)+f(y)}{2}
+\geq
+f\left(\frac{x+y}{2}\right).
+\]
+
+\item Let $x_1,x_2,\dots,x_n$ be real numbers.
+Their average is
+\[
+\frac{x_1+x_2+\cdots+x_n}{n}.
+\]
+
+Guess the general inequality corresponding to part (g).
+
+\item Show that if
+\[
+f(x)=x^2,
+\]
+then
+\[
+\frac{x_1^2+x_2^2+\cdots+x_n^2}{n}
+\geq
+\left(
+\frac{x_1+x_2+\cdots+x_n}{n}
+\right)^2.
+\]
+
+(Hint: expand
+\[
+(x_1+x_2+\cdots+x_n)^2
+\]
+and compare cross-terms.)
+
+\item A function $f$ can be called \textit{convex} (not a definition) if its graph bends upward.
+One version of Jensen's inequality states that for convex functions,
+\[
+f(\text{average})
+\leq
+\text{average of } f.
+\]
+
+Explain why the function
+\[
+f(x)=x^2
+\]
+is convex from the inequalities above.
+
+\end{enumerate}
+
+% ================================================================
+\newpage
+\section*{Solutions}
+
+Credit: Standard introductory analysis and convexity.
+
+\begin{enumerate}[(a)]
+
+\item Expanding gives
+\[
+(x-y)^2=x^2-2xy+y^2.
+\]
+
+\item Any real number squared is nonnegative, so
+\[
+(x-y)^2\geq 0.
+\]
+
+\item Since
+\[
+x^2-2xy+y^2\geq 0,
+\]
+moving the middle term to the other side gives
+\[
+x^2+y^2\geq 2xy.
+\]
+
+\item Expanding,
+\[
+(x+y)^2=x^2+2xy+y^2.
+\]
+
+Using part (c),
+\[
+2xy\leq x^2+y^2.
+\]
+
+Substituting,
+\[
+(x+y)^2
+\leq
+x^2+(x^2+y^2)+y^2
+=
+2x^2+2y^2.
+\]
+
+Dividing by $2$ gives
+\[
+\frac{(x+y)^2}{2}
+\leq
+x^2+y^2.
+\]
+
+\item Dividing both sides by $2$,
+\[
+\left(\frac{x+y}{2}\right)^2
+\leq
+\frac{x^2+y^2}{2}.
+\]
+
+Equivalently,
+\[
+\frac{x^2+y^2}{2}
+\geq
+\left(\frac{x+y}{2}\right)^2.
+\]
+
+\item The average of the squares is at least the square of the average.
+
+In other words,
+squaring after averaging gives a smaller number than averaging after squaring.
+
+\item Since
+\[
+f(x)=x^2,
+\]
+we have
+\[
+f\left(\frac{x+y}{2}\right)
+=
+\left(\frac{x+y}{2}\right)^2,
+\]
+and
+\[
+\frac{f(x)+f(y)}{2}
+=
+\frac{x^2+y^2}{2}.
+\]
+
+Thus part (e) becomes
+\[
+\frac{f(x)+f(y)}{2}
+\geq
+f\left(\frac{x+y}{2}\right).
+\]
+
+\item The natural generalization is
+\[
+\frac{f(x_1)+f(x_2)+\cdots+f(x_n)}{n}
+\geq
+f\left(
+\frac{x_1+x_2+\cdots+x_n}{n}
+\right).
+\]
+
+This is Jensen's inequality for equal weights.
+
+\item Expanding,
+\[
+(x_1+\cdots+x_n)^2
+=
+x_1^2+\cdots+x_n^2
++
+2\sum_{i<j}x_ix_j.
+\]
+
+Also,
+\[
+0\leq (x_i-x_j)^2=x_i^2-2x_ix_j+x_j^2,
+\]
+so
+\[
+2x_ix_j\leq x_i^2+x_j^2.
+\]
+
+Summing over all pairs $i<j$,
+every square term appears exactly $(n-1)$ times, so
+\[
+2\sum_{i<j}x_ix_j
+\leq
+(n-1)\sum_{i=1}^n x_i^2.
+\]
+
+Therefore
+\[
+(x_1+\cdots+x_n)^2
+\leq
+n\sum_{i=1}^n x_i^2.
+\]
+
+Dividing by $n^2$ gives
+\[
+\left(
+\frac{x_1+\cdots+x_n}{n}
+\right)^2
+\leq
+\frac{x_1^2+\cdots+x_n^2}{n}.
+\]
+
+\item The inequalities show that averaging inputs before applying $f(x)=x^2$
+always gives a value no larger than averaging the outputs.
+
+Geometrically, this means the graph of $y=x^2$ bends upward.
+
+That upward bending is exactly what convexity means. \qed
+
+\end{enumerate}
+
+\end{document}
