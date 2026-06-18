@@ -1,0 +1,291 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\geometry{margin=1in}
+
+\newtheorem*{claim}{Claim}
+\newtheorem*{lemma}{Lemma}
+
+\title{Additive Combinatorics - Lecture 2}
+\author{}
+\date{}
+
+% ----------------------------------------------------------------
+\begin{document}
+\maketitle
+
+I want to reproduce Dvir's proof of the finite field Kakeya conjecture, following Terence Tao's write up at his blog.
+This is to be done as a self contained write-up, and is made as simple as possible for even a beginner to understand, and to even attempt the proofs of the main statements.
+
+If $F^n$ is a vector space over a finite field $F$,
+a \textit{Kakeya set} in $F^n$ is a subset of $F^n$
+that contains a line in every direction.
+
+The finite field Kakeya conjecture states that
+any Kakeya set in $F^n$ must have size at least $C_n |F|^n$ for some constant $C_n$ depending only on $n$.
+
+% ================================================================
+\section*{Questions}
+
+\begin{enumerate}[(a)]
+
+  \item Let $F$ be a field and let $d \geq 0$ be an integer. Let $F[X]$
+  denote the polynomial ring in one variable over $F$.
+  Prove, using strong induction on $d$, that if $P \in F[X]$ is a
+  non-zero polynomial of degree at most $d$, then $P$ has at most $d$
+  roots in $F$.
+  For the base case take $d = 0$.
+  For the inductive step, assume the result holds for all degrees
+  $0, 1, \ldots, d-1$ and deduce it for degree $d$.
+
+  \medskip
+  \noindent(Hint: a field is an integral domain: the product of any two
+  non-zero elements is non-zero.
+
+  \medskip
+  \noindent Recall the \textbf{Factor Theorem}: if $r \in F$ is a root
+  of $P \in F[X]$, then $P(X) = (X - r)Q(X)$ for some $Q \in F[X]$
+  of degree $\deg P - 1$.  You may use this without proof.)
+
+  \medskip
+  \noindent\textit{Warm-up.} Let $P(X) = X^2 - 5X + 6$.
+  \begin{enumerate}[(i)]
+    \item Factorise $P$. How many roots does $P$ have? How does this compare to its degree?
+    \item Now suppose $Q(X)$ is \emph{any} non-zero polynomial of degree
+    $2$. Explain why $Q$ can have at most $2$ roots.
+  \end{enumerate}
+
+  \item Given any finite set $E \subseteq F$ with $|E| \leq d$, show
+  that there exists a non-zero polynomial $P \in F[X]$ of degree at
+  most $d$ such that $P(x) = 0$ for all $x \in E$.
+
+  \medskip
+  \noindent\textit{Warm-up.} Let $F = \mathbb{R}$ and $E = \{1, 3, 7\}$.
+  \begin{enumerate}[(i)]
+    \item Write down a polynomial of degree $3$ that vanishes at every point of $E$.
+    \item Can you write down a non-zero polynomial of degree $2$ that
+    vanishes at all three points?
+  \end{enumerate}
+
+  \item Let $E \subseteq F^n$ be a set of cardinality less than $\binom{n+d}{d}$.
+  Show that there exists a non-zero polynomial
+  $P \in F[X_1, \ldots, X_n]$ of degree at most $d$ such that $P(x) = 0$
+  for all $x \in E$.
+
+  \medskip
+  \noindent\textit{Warm-up.}
+
+  \textbf{Stars and Bars.}
+  The stars and bars method counts the number of solutions in $\mathbb{Z}_{\ge 0}$ to
+  \[
+  x_1 + \cdots + x_k = N.
+  \]
+  It does this by placing $N$ identical ``stars'' in a row and inserting $k-1$ ``bars'' to split them into $k$ groups. Each arrangement corresponds uniquely to a solution $(x_1,\ldots,x_k)$, so the number of solutions is
+  \[
+  \binom{N+k-1}{k-1}.
+  \]
+
+  \textbf{Kernel.}
+  Let $T: V \to W$ be a linear map of vector spaces over $F$. The kernel of $T$ is
+  \[
+  \ker(T) = \{ v \in V \mid T(v) = 0 \}.
+  \]
+  It is a subspace of $V$, and $T$ is injective if and only if $\ker(T)=\{0\}$.
+
+  \begin{enumerate}[(i)]
+    \item A monomial has the form
+    \[
+    X_1^{\alpha_1} \cdots X_n^{\alpha_n}, \quad \alpha_i \ge 0.
+    \]
+    Compute the number of monomials in $n$ variables of total degree at most $d$.
+    (Hint: count the number of non-negative integer solutions of
+    \[
+    \alpha_1 + \cdots + \alpha_n \le d.
+    \]
+    You may use the stars-and-bars method.)
+    \item Let $F^E$ be the vector space of functions $f : E \to F$.
+    Compute $\dim_F(F^E)$, and use the hypothesis on $|E|$ to compare it
+    with $\dim_F(V)$.
+
+    \item Let $V$ be the vector space of polynomials in $F[X_1, \ldots, X_n]$ of degree at most $d$. Define the evaluation map
+    \[
+    \mathrm{ev} : V \to F^E, \quad P \mapsto (P(e))_{e \in E}.
+    \]
+    Compare $\dim_F(V)$ and $\dim_F(F^E)$ and deduce that $\mathrm{ev}$ can not be injective and has a nontrivial kernel.
+    \item Using the definition of a nontrivial kernel and the map in the previous exercise is noninjective, conclude that there exists a non-zero polynomial $P \in V$ such that
+    \[
+    P(e) = 0 \quad \text{for all } e \in E.
+    \]
+  \end{enumerate}
+
+  Here are the statements of the main theorems.
+
+  \item Let $E$ be a Kakeya set in $F^n$, and let
+  $P \in F[X_1, \ldots, X_n]$ be a polynomial of degree at most $|F|-1$
+  that vanishes on a Kakeya set $E$.  Show that $P = 0$.
+  (Could not find good warm ups for these two remaining exercises)
+
+  \item Show that every Kakeya set in $F^n$ has size at least $\binom{n+|F|-1}{n}$.
+  Conclude that every Kakeya set in $F^n$ has size at least
+  $C_n |F|^n$ for some constant $C_n$ depending only on $n$.
+
+\end{enumerate}
+
+% ================================================================
+\newpage
+\section*{Solutions}
+
+Credit: Tao's exposition of Dvir's proof of the finite field Kakeya conjecture,
+\href{https://terrytao.wordpress.com/2008/03/24/dvirs-proof-of-the-finite-field-kakeya-conjecture/}{\textit{Tao's proof of the finite field Kakeya conjecture}}.
+
+\begin{enumerate}[(a)]
+
+  \item
+
+  The factorisation of $P(X) = (X - 2)(X - 3)$ admits two roots, $2$
+  and $3$, which matches the degree of $P$.
+
+  For any non-zero polynomial $Q$ of degree $2$, if $r$ is a root of
+  $Q$, then by the Factor Theorem $Q(X) = (X - r)R(X)$ for some
+  $R \in F[X]$ of degree $1$.  If $Q$ had a second root $s \neq r$,
+  then $R(s) = 0$ and again by the Factor Theorem
+  $R(X) = (X - s)S(X)$ for some non-zero constant $S$.
+  Hence $Q(X) = (X - r)(X - s)S(X)$, and $Q$ has no more than $2$ roots.
+
+  For the main proposition, we argue by strong induction on $d$.
+
+  \textit{Base case} $d = 0$: a non-zero constant polynomial has no
+  roots at all, so it has at most $0$ roots. \checkmark
+
+  \textit{Inductive step}: Suppose the statement holds for all degrees
+  $0, 1, \ldots, d-1$, and let $P$ have degree exactly $d \ge 1$.
+  If $P$ has no roots in $F$, the claim holds trivially.
+  Otherwise pick a root $r \in F$.
+  By the Factor Theorem, $P(X) = (X - r)Q(X)$ for some
+  $Q \in F[X]$ of degree $d - 1$.
+  Since $F$ is an integral domain, any further root $s$ of $P$ satisfies
+  $(s - r)Q(s) = 0$; as $s \neq r$ we get $Q(s) = 0$, so $s$ is a
+  root of $Q$.
+  By the inductive hypothesis, $Q$ has at most $d - 1$ roots, so $P$
+  has at most $1 + (d-1) = d$ roots. \qed
+
+  % ---------------------------------------------------------------
+  \item
+
+  The polynomial $P(X) = (X-1)(X-3)(X-7)$ has degree $3$ and vanishes
+  at every point of $E$.  There is no non-zero polynomial of degree $2$
+  that vanishes at all three points: such a polynomial would have at
+  least $3 > 2$ roots, contradicting part~(a).
+
+  Let $E = \{e_1, e_2, \ldots, e_k\}$ with $k = |E| \leq d$.
+
+  Construct:
+  \[
+    P(X) \;=\; \prod_{i=1}^{k}(X - e_i).
+  \]
+  This polynomial is non-zero (it has leading coefficient $1$),
+  has degree exactly $k \leq d$, and satisfies $P(e_i) = 0$ for every
+  $e_i \in E$.  \qed
+
+  % ---------------------------------------------------------------
+  \item
+
+  The space $V$ of polynomials in $F[X_1, \ldots, X_n]$ of degree at
+  most $d$ has as a basis the monomials
+  $X_1^{\alpha_1} \cdots X_n^{\alpha_n}$ with
+  $\alpha_1 + \cdots + \alpha_n \leq d$.
+  Introducing a slack variable $\alpha_{n+1} = d -
+  (\alpha_1 + \cdots + \alpha_n) \geq 0$, we count solutions to
+  $\alpha_1 + \cdots + \alpha_{n+1} = d$ in non-negative integers.
+  By stars and bars, this is $\binom{d+n}{n} = \binom{n+d}{d}$,
+  so $\dim_F(V) = \binom{n+d}{d}$.
+
+  The vector space $F^E$ of $F$-valued functions on $E$ has a basis
+  consisting of the indicator functions $\mathbf{1}_e$ for $e \in E$
+  (where $\mathbf{1}_e(e) = 1$ and $\mathbf{1}_e(e') = 0$ for
+  $e' \neq e$), so $\dim_F(F^E) = |E|$.
+
+  By hypothesis, $|E| < \binom{n+d}{d}$, so
+  $\dim_F(F^E) = |E| < \binom{n+d}{d} = \dim_F(V)$.
+
+  Since $\dim_F(V) > \dim_F(F^E)$, the evaluation map
+  $\mathrm{ev} : V \to F^E$ cannot be injective (a linear map from a
+  larger space to a smaller one cannot be injective).
+  By definition of the kernel, this means $\ker(\mathrm{ev}) \neq
+  \{0\}$: there exists a non-zero polynomial $P \in V$ with
+  $\mathrm{ev}(P) = 0$, i.e.\ $P(e) = 0$ for all $e \in E$.  \qed
+
+  % ---------------------------------------------------------------
+  \item
+
+  Suppose for contradiction that $P \neq 0$.
+  Since $P$ vanishes on the non-empty set $E$ and a non-zero constant
+  never vanishes, we have $d := \deg P \geq 1$.
+  Write $P = \sum_{i=0}^{d} P_i$ where $P_i$ is the homogeneous
+  component of degree $i$; in particular $P_d \neq 0$.
+
+  Let $v \in F^n \setminus \{0\}$ be any direction.
+  Since $E$ is a Kakeya set, there exists $x_v \in F^n$ such that the
+  line $\{x_v + tv : t \in F\}$ is entirely contained in $E$.
+  The map $t \mapsto P(x_v + tv)$ is a polynomial in $t$ of degree at
+  most $d \leq |F|-1$.  It vanishes at every $t \in F$ (all $|F|$
+  elements), so by part~(a) it is identically zero as a polynomial in
+  $t$.
+
+  In particular every coefficient in $t$ is zero.
+  The coefficient of $t^d$ in $P(x_v + tv)$ equals $P_d(v)$: indeed,
+  the only contribution of degree $d$ in $t$ comes from the leading
+  term $P_d(x_v + tv)$, whose $t^d$ coefficient is $P_d(v)$ by
+  homogeneity.
+  Hence $P_d(v) = 0$ for every $v \in F^n \setminus \{0\}$.
+  Since $P_d$ is homogeneous of degree $d \geq 1$, we also have
+  $P_d(0) = 0$, so $P_d$ vanishes on all of $F^n$.
+
+  We now derive the contradiction $P_d = 0$ as a polynomial.
+  Write
+  \[
+    P_d(X_1, \ldots, X_n)
+    \;=\; \sum_{j=0}^{d} X_1^j \cdot Q_j(X_2, \ldots, X_n)
+  \]
+  where each $Q_j$ is a polynomial in $X_2, \ldots, X_n$.
+  For any fixed $(a_2, \ldots, a_n) \in F^{n-1}$, the single-variable
+  polynomial $\sum_{j=0}^{d} Q_j(a_2,\ldots,a_n)\, X_1^j$ has degree
+  at most $d \leq |F|-1$ and vanishes at every element of $F$.
+  By part~(a), each coefficient is zero: $Q_j(a_2,\ldots,a_n) = 0$
+  for all $j$ and all $(a_2,\ldots,a_n) \in F^{n-1}$.
+  Applying the same argument to each $Q_j$ in the variable $X_2$
+  (with the remaining variables fixed), and continuing variable by
+  variable, we conclude that every $Q_j$ is the zero polynomial.
+  Hence $P_d = 0$, contradicting $P_d \neq 0$.
+  Therefore $P = 0$.  \qed
+
+  % ---------------------------------------------------------------
+  \item
+
+  Suppose for contradiction that the Kakeya set $E$ satisfies
+  $|E| < \binom{n+|F|-1}{n}$.
+  Setting $d = |F|-1$ in part~(c), there exists a non-zero polynomial
+  $P \in F[X_1, \ldots, X_n]$ of degree at most $|F|-1$ vanishing on
+  $E$.  But by part~(d), any polynomial of degree at most $|F|-1$
+  vanishing on a Kakeya set must equal zero.
+  This is a contradiction, so $|E| \geq \binom{n+|F|-1}{n}$.
+
+  It remains to show $\binom{n+|F|-1}{n} \geq C_n |F|^n$.
+  We have
+  \[
+    \binom{n+|F|-1}{n}
+    \;=\; \frac{|F|\cdot(|F|+1)\cdots(|F|+n-1)}{n!}
+    \;\geq\; \frac{|F|^n}{n!},
+  \]
+  since each of the $n$ factors in the numerator is at least $|F|$.
+  Hence every Kakeya set in $F^n$ has size at least $C_n|F|^n$ with
+  $C_n = \dfrac{1}{n!}$.  \qed
+
+\end{enumerate}
+
+\end{document}

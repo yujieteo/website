@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{example}{Example}
+
+\geometry{margin=1in}
+
+\title{Sheaf Theory 1}
+\author{-}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+Sheaf theory is a very conceptual idea that was first invented by Leray when he was working on the topology of fibre bundles which I am not sure about. It was then developed by Cartan, Serre, and Grothendieck to be a central part of modern algebraic geometry, or in places where the local to global principle is highly emphasised.
+
+There are lots and lots of expositions of sheaves. But I would like to emphasise the topological perspective that Serre gives in a translation by Piotr Achinger. All mistakes my own, and no fault of the translator.
+
+The use of topology or some form of logic arising from topology is essential to the definition of a sheaf. The idea is that one wants to have some form of local to global principle, and this is what the topology gives us. The topology gives us some form of logic on the space, and this logic is what allows us to glue local data together to obtain global data.
+
+\begin{definition}[Serre's definition of a sheaf]
+    Consider a topological space, denoted by $X$. One can endow a sheaf of abelian groups $\mathcal{F}$ (note that, we can change this data to that of anything that has the characteristics of an abelian category)
+
+    This sheaf, $\mathcal{F}$ takes from each element $x$ to its stalk $\mathcal{F}_x$.
+
+    There is also a topology on the sum of sets $f + g$ (we can fix this) of stalk. Recall that we want a topology on this since we want to do some form of logic on this.
+
+    One can take equivalence classes of local sections, or germs. These are elements of a stalk $\mathcal{F}_x$, and are denoted as $[s]_x$. Then, it is the part of the data of the sheaf $\mathcal{F}$ such that one can take projections $p$ of the stalk onto the topological space $X$. The family of products of stalks consists of pairs such that projections are equal is denoted as the sum of stalks.
+
+    Lastly, there are the axioms of the data.
+    
+    Firstly, one can look at open neighbourhoods associated with germs, and the projection $p$ of germs. This projection $p$ is a homeomorphism of open neighbourhoods. Interestingly, with this axiom only, one can have a sheaf of sets, and this would be perfectly sufficient as a condition.
+
+    Secondly, the map taking negatives of sections $-f$ are continuous maps of stalks. The map taking sums of sections to its sum $f + g$ in a single stalk is also a continuous map of stalks. This axiom turns this into a group.
+\end{definition}
+
+The following points seem to be essential. One wants some form of projection $p$ so that there is a restriction map. One wants some form of abelian group structure on the stalk with some addition. Therefore, if you want to generalise sheaves you may want to weaken this. If you think the idea of groups are not natural, then you can try to weaken this to be a monoid, set. Or you may try to strengthen this to be a groupoid.
+
+There are also questions of this being a topological space. The condensed formalism developed by Scholze and Clausen is one way to try and avoid the problems of topological spaces not being good enough as a category. Particularly, topological spaces do not form an abelian category.
+
+The classical example is the case of a constant sheaf. Which we will give as an example here.
+
+\begin{example}
+    Consider an abelian group. Set local stalks to be this abelian group for all points in a topological space. Then the set of all stalks can be identified by the product of the topological space with the abelian group in some weird way. Equip it with the product topology on the topological space and the discrete topology on the abelian group, one obtains the sheaf, this is the constant sheaf "isomorphic" to the abelian group in question.
+\end{example}
+
+Using Serre's definition, there is one more point about how stalks work. These appear as some sort of exercise but I will describe it in full here.
+
+\begin{theorem}
+    Consider for all equivalence classes $[s]_{x}$ of local sections (germs) of a stalk at a point $\mathcal{F+x}$, there exists a section over a open neighbourhood $U_x$ of that point such that the section over the point IS this germ. The two sections with this proeprty coincide on an open neighbourhood of the point $U_x$. In other words, the stalk are FILTERED colimit of all the open neighbourhoods $(U_x)$ running all open neighbourhoods of the point $U_x$.
+\end{theorem}
+
+A more constructive definition of a sheaf is also presented in Serre's exposition of sheaves.
+
+\begin{definition}
+    Consider stalks $\mathcal{F}_x$ as colimit over a filtration of open neighbourhoods $(U_x)$ (the indexing is left ambiguous for now). Then one can have for each point that belongs to an open subset in the open neighbourhood $U$, one can have a canonical inclusion map from the stalk of the open neighbourhood $\mathcal{F}_{U}$ (i.e. sets [note that we may have to change this later?] of equivalence classes associated with the open neighbourhood) to the stalk at the point $\mathcal{F}_x$.
+
+    Next, one endows for each point $t$ in the stalk associated with the open neighourhood $U$, and consider the set of canonical morphisms associated with the point $x$ running over the open neighbourhood $U$. Endow the sheaf with the topology generated by $[t,U]$. An germ $f$ in each stalk has a base of neighbourhooods consisting of these sets $[t, U]$ such that for each other $x$ in $U$ one can compute the canonical morphism of $t$ to be the germ $f$ itself.
+
+    There is a transitivity condition on the canonical morphism. One takes the chain of inclusions $U$ in $V$ in $W$, one has the transitivity condition of composing the inclusion of $U$ in $V$, and the inclusion of $V$ in $W$ to become the composition $U$ in $W$.
+\end{definition}
+
+At least to me, the essential point is that there is this canonical morphism that inherits the inclusion relation on the level of "space" (of course we are working with topological spaces here, but we can work with as much generality as we wish).
+
+I got sidetracked by this but there is an cool point. Interestingly, there is a short aside on the definition of injective and surjective. I will rewrite this definition. A function is injective equality on the image of elements implies equality of elements on the domain. (I like to think of preimage of the function on the postimage of an element is equal to the same element, but note that the inverse map may not exist in general). A function is surjective if the (post)image of a function is the full codomain. A function is bijective it is both. Serre's definition is a bit different however. These definitions sort of hide the intuition on some existence condition. If I remember correctly, assume the preimage exist, a function is injective if the preimage of an element (denoted as a fibre, recall that preimnages denote some sort of composition) has cardinality of at most 1 as a set, a function is surjective if the preimage of an element i.e. a fibre has a cardinality of at least one, and function is bijective if indeed it is injective and surjective.
+
+I think it is easier to see an example of all this in action as given in Serre's notes.
+
+\begin{example}
+    Consider an abelian group, the colimit or the stalk associated with the open neighbourhood has its values in the abelian group, so that there is an associate additive law of functions. One can compute the restriction of such functions from a alarger open neighbourhodo V from the stalk associated with V to the stalk associated with U. One obtains a system, and a sheaf of germs of functions with values in the abelian group. One can then identify sections of the sheaf over the open neighbourhood with elements of the stalk.
+\end{example}
+
+Another example is that of a sheaf being induced by the bigger sheaf on an open neighbourhood. It is beautiful, what one does is to take the preimage of the projection on an open neighourhood contained in the larger sheaf, and one obtains the sheaf induced by the larger sheaf on the open neighbourhood.
+
+One more example is the extension and restriction of sheaves, or some sort of support. Let $X$ be a space, $Y$ be closed subspace, $\mathcal{F}$ be a sheaf on $X$, this sheaf is concentrated on a subspace if all stalks at points are $0$ if the point is in the complement of $X$ in $Y$. Additive notation is used in Serre's FAC since one attaches a sheaf with values in an ABELIAN group. There are several more examples where they tried to do this with sheaves of rings and sheaves of modules with some other applications. There is also a short note being for every sheaf of abelian groups being a sheaf of "ring" modules taking the ring to be a constant sheaf isomorphic to the ring of integers. One can compute subsheaves and quotient sheaves by passing over to the Freyd-Mitchell embedding theorem, but I can't spell this out in detail off the top of my head. 
+
+\end{document} 

@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{example}{Example}
+\newtheorem{corollary}{Corollary}
+
+\geometry{margin=1in}
+
+\title{Interpolation Theory 1}
+\author{-}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{theorem}
+Let $\lambda \in (0,1)$. Suppose $f : [0,1] \to \mathbb{R}$ is continuous and
+satisfies the following condition: for every $0 \le a < b \le 1$, the value
+of $f$ at the weighted point $(1-\lambda)a + \lambda b$ is equal to either
+the minimum or the maximum of $f$ on $[a,b]$. Then $f$ is constant.
+\end{theorem}
+
+\begin{proof}
+Suppose for contradiction that $f$ is not constant. Since $f$ is continuous
+on the compact interval $[0,1]$, it attains a global maximum value $M$ and a
+global minimum value $m$ (there is a video for this, I love this video), and our assumption forces $M > m$ since we want to derive a contradiction.
+
+Define the sets
+\[
+  A = f^{-1}(M) = \{x \in [0,1] : f(x) = M\},
+  \qquad
+  B = f^{-1}(m) = \{x \in [0,1] : f(x) = m\}.
+\]
+Both sets are nonempty (because $f$ attains its extrema) and closed (because
+$f$ is continuous, and preimages of closed sets are closed). Pick any point $a_0 \in A$ and any point $b_0 \in B$;
+without loss of generality assume $a_0 < b_0$ again for the sake of contradiction.
+
+Build the two sequences inductively. At every stage we maintain points
+$a_n \in A$ and $b_n \in B$ with $a_n < b_n$ based on our hypothesis. Given such a pair, consider
+the interval $[a_n, b_n]$. Because $a_n \in A$ and $b_n \in B$, the maximum
+of $f$ on $[a_n, b_n]$ is exactly $M$ and the minimum is exactly $m$.
+Applying the hypothesis to this interval, the weighted interior point is given by the convex combination
+\[
+  p_n = (1-\lambda)\,a_n + \lambda\,b_n
+\]
+must satisfy $f(p_n) \in \{m, M\}$. We update the pair according to which
+extremum is hit, this feels awfully similar to a binary search:
+\begin{itemize}
+  \item If $f(p_n) = M$, then $p_n \in A$; we set $a_{n+1} = p_n$ and
+        $b_{n+1} = b_n$, so the new interval is $[p_n, b_n]$, which has
+        length $(1-\lambda)(b_n - a_n)$.
+  \item If $f(p_n) = m$, then $p_n \in B$; we set $a_{n+1} = a_n$ and
+        $b_{n+1} = p_n$, so the new interval is $[a_n, p_n]$, which has
+        length $\lambda(b_n - a_n)$.
+\end{itemize}
+In either case the length shrinks by a factor of at most
+$\rho := \max(\lambda, 1-\lambda)$, which is strictly less than one because
+$\lambda \in (0,1)$ and it cannot be $0$ or $1$. After $n$ steps the length satisfies
+\[
+  b_n - a_n \;\le\; \rho^n (b_0 - a_0) \;\longrightarrow\; 0.
+\]
+Therefore $a_n$ and $b_n$ converge to the same limit, call it $x^*$.
+Since $A$ is closed and every $a_n$ belongs to $A$, we have $x^* \in A$,
+so $f(x^*) = M$. Since $B$ is closed and every $b_n$ belongs to $B$, we
+also have $x^* \in B$, so $f(x^*) = m$. This forces $M = m$, contradicting
+our assumption that $M > m$. Hence $f$ must be constant.
+\end{proof}
+
+\begin{corollary}
+If $f : [0,1] \to \mathbb{R}$ is continuous and satisfies
+\[
+  f\!\left(\frac{a+b}{2}\right) \in
+  \left\{\min_{x \in [a,b]} f(x),\; \max_{x \in [a,b]} f(x)\right\}
+  \quad \text{for every } 0 \le a < b \le 1,
+\]
+then $f$ is constant.
+\end{corollary}
+
+\begin{proof}
+This is the special case $\lambda = \tfrac{1}{2}$ of the theorem, since
+$(1 - \tfrac{1}{2})\,a + \tfrac{1}{2}\,b = \tfrac{a+b}{2}$ is the midpoint
+of $[a,b]$.
+\end{proof}
+
+\end{document}
