@@ -1,5 +1,0 @@
-https://docs.google.com/spreadsheets/d/1TTHbONFo4OV35Bv0KfEFllnkP-aLGrr_fmzwfdBqBY0/edit?gid=0#gid=0, woog's review of mechanistic interpretability papers.
-
-https://psnprofiles.com/guide/11946-persona-5-royal-100-perfect-schedule, Persona 5 Royal Perfect Schedule
-
-https://www.sciencedirect.com/science/article/abs/pii/0196677485900379?via%3Dihub, an analysis of optimal caching by Knuth
