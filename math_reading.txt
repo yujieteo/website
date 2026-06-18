@@ -5485,3 +5485,5 @@ https://www.cmu.edu/dietrich/philosophy/hott/seminars/slides/diliberti-slides.pd
 http://www-igm.univ-mlv.fr/~perrin/Recherche/Seminaires/Profinis/Slides/Seance1/profinite.pdf, topological semigroups in 19 slides
 
 https://web.ma.utexas.edu/users/dafr/CBMS133.pdf, Daniel S Fried on quauntum field theory in 195 pages
+
+https://ebooks.karbust.me/Mathematics/T.%20Y.%20Lam%20-%20A%20First%20Course%20in%20Noncommutative%20Rings%20(2001)%20[978-1-4419-8616-0].pdf, introduction to non-commutative rings
