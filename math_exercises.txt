@@ -2517,3 +2517,5 @@ https://ymsc.tsinghua.edu.cn/__local/7/B5/04/0890A5CE2893D5380292FD983CD_99A1AD7
 https://utrechtgeometrycentre.nl/wp-content/uploads/2025/07/six-functors-for-etale-groupoids.pdf, etale groupoids
 
 https://seriouscomputerist.atariverse.com/media/pdf/book/Concrete%20Mathematics.pdf, Concerete Mathematics by Knuth.
+
+https://seriouscomputerist.atariverse.com/media/pdf/book/Art%20of%20Computer%20Programming%20-%20Volume%201%20(Fundamental%20Algorithms).pdf, Knuth's Fundamental Algorithms
