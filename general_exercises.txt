@@ -1,3 +1,7 @@
 https://arxiv.org/pdf/2012.03112
     - (Page 2) Memory movement on mobile devices costs how many % of energy. Hint: 90%
-    
+
+https://sci-hub.sg/10.1016/0196-6774(85)90037-9
+    - (Page 1) Give a sequence of radix-d digits. What does this sequence represent?
+    - (Page 1) Give a formula for defining the cache. 
+    - (Page 2) Define a fault given the above.

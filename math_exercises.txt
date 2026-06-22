@@ -2515,3 +2515,5 @@ https://ymsc.tsinghua.edu.cn/__local/7/B5/04/0890A5CE2893D5380292FD983CD_99A1AD7
     - (Page 3) Let K be a complete discrete valuation field extension of Q_p, K_\infty a totally ramified Z_p extension of K, let K_n bethe subfield of K_\infty corresponding to the closed subgroup p^n Z_p of Gal(K_\infty / K) = Z_p for any n in N.
 
 https://utrechtgeometrycentre.nl/wp-content/uploads/2025/07/six-functors-for-etale-groupoids.pdf, etale groupoids
+
+https://seriouscomputerist.atariverse.com/media/pdf/book/Concrete%20Mathematics.pdf, Concerete Mathematics by Knuth.
