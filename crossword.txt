@@ -1,0 +1,19 @@
+Crosswords Tips
+
+Abbreviations: look for abbreviations first. Weird words? Use abbreviations!
+
+Hidden Answers: answers hidden in plain sight. Definition at start or end, indicator of hidden answer next to string. Pro tip, look for definition first.
+    - as seen in
+    - paddling
+
+Anagrams
+    - where this is played
+
+Leading letters:
+    - leading
+    - leader
+
+Deletion: a letter is deleted
+    - ousted (leader is ousted)
+
+https://crossword-solver.io/: gives solutions to various crosswords
